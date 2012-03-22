@@ -2,13 +2,12 @@
 
 div#header{
 	text-align : center;
-	padding: 5.7em;
-	background-color: #EBFFC5;
+	padding: 2em;
+	background-color: #F2B15D;
 	
 }
 
 div#page{
-	div#Seite{
 	text-align: left;    
     margin: 0 auto;      
     width: 950px;
@@ -16,9 +15,10 @@ div#page{
     border-width: thin;
 	border-style: solid;
 	border-color: black;
-	background-color: #ccc;
-   
-}
+	background-color: #87F25D;
 }
 
+div#footer{
+	border-top: solid black;
+	border-width: thin;
 }
