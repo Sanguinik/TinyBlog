@@ -12,8 +12,18 @@
 	<h:outputStylesheet library="css" name="style.css" />
 
 	<ui:composition template="/template.xhtml">
+
+		<ui:define name="header">
+			<h1>
+				<h:graphicImage styleClass="picture" alt="TinyBlog" library="images"
+					name="Logo.png" />
+
+				<h:outputText value=" Impressum" />
+			</h1>
+		</ui:define>
+
 		<ui:define name="content">
-			<p>Herzlich Willkommen im TinyBlog!</p>
+			<p>Das ist das Impressum</p>
 
 		</ui:define>
 	</ui:composition>

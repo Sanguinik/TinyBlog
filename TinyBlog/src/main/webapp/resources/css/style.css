@@ -1,12 +1,12 @@
 @CHARSET "UTF-8";
 
 body {
-    background-color: #D1FFB3;
-    color: black;
-    font-family: Helvetica,Arial,sans-serif;
-    font-size: 100%;
-    margin: 0;
-    padding: 1em 0;
+	background-color: #D1FFB3;
+	color: black;
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 100%;
+	margin: 0;
+	padding: 1em 0;
 }
 
 div#menu a:link {
@@ -77,8 +77,7 @@ div#footer {
 	text-indent: 5px;
 }
 
-.picture{
-	width : 100px;
-	height : 100px;
+.picture {
+	width: 100px;
+	height: 100px;
 }
-
