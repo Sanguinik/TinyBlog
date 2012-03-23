@@ -19,6 +19,10 @@
 			<from-outcome>login</from-outcome>
 			<to-view-id>/login.xhtml</to-view-id>
 		</navigation-case>
+		<navigation-case>
+			<from-outcome>logout</from-outcome>
+			<to-view-id>/index.xhtml</to-view-id>
+		</navigation-case>
 	</navigation-rule>
 
 </faces-config>

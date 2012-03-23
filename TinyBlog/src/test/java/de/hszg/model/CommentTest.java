@@ -6,11 +6,13 @@ import org.junit.Test;
 
 public class CommentTest {
 	
-	Comment comment = new Comment();
+	User user = new User("John Doe","email@example.org","12345");
+
+	
+	Comment comment = new Comment(user, "Toller Artikel");
 
 	@Test
 	public void contentTest() {
-		comment.setContent("Toller Artikel");
 		assertEquals("Toller Artikel",comment.getContent());
 	}
 
