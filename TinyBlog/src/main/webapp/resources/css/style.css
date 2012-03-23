@@ -1,24 +1,70 @@
 @CHARSET "UTF-8";
 
-div#header{
-	text-align : center;
-	padding: 2em;
-	background-color: #F2B15D;
-	
+div#menu a:link {
+	font-weight: bold;
+	color: white;
+	text-decoration: none;
 }
 
-div#page{
-	text-align: left;    
-    margin: 0 auto;      
-    width: 950px;
-    padding: 0;
-    border-width: thin;
+div#menu a:visited {
+	font-weight: bold;
+	color: white;
+	text-decoration: none;
+}
+
+div#menu a:focus {
+	font-weight: bold;
+	color: white;
+	text-decoration: none;
+}
+
+div#menu a:hover {
+	font-weight: bold;
+	color: white;
+	text-decoration: none;
+}
+
+div#menu a:active {
+	font-weight: bold;
+	color: white;
+	text-decoration: none;
+}
+
+div#menu {
+	background-color: #000;
+	color: white;
+	padding: 0.01px;
+	text-indent: 5px;
+}
+
+div#header {
+	text-align: left;
+	padding: 0.5em;
+	border-bottom: solid black;
+	border-width: thin;
+	text-indent: 5px;
+}
+
+div#content {
+	text-align: left;
+	text-indent: 5px;
+}
+
+div#page {
+	text-align: left;
+	margin: 0 auto;
+	width: 950px;
+	padding: 0;
+	border-width: thin;
 	border-style: solid;
 	border-color: black;
 	background-color: #87F25D;
 }
 
-div#footer{
+div#footer {
 	border-top: solid black;
 	border-width: thin;
+	text-align: left;
+	text-indent: 5px;
 }
+

@@ -10,6 +10,13 @@
 </h:head>
 <h:body>
 	<div id="page">
+		
+
+		<div id="menu">
+			<ui:insert name="menu">
+				<ui:include src="/menu.xhtml" />
+			</ui:insert>
+		</div>
 
 		<div id="header">
 			<ui:insert name="header">
@@ -18,8 +25,9 @@
 		</div>
 
 		<br />
-
+		<div id="content">
 		<ui:insert name="content">Content</ui:insert>
+		</div>
 
 		<br />
 		<div id="footer">
