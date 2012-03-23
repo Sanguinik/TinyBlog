@@ -44,25 +44,28 @@ div#menu {
 	color: white;
 	padding: 5px;
 	text-indent: 5px;
+	border-bottom: solid #87F25D;
+	border-width:thin;
 }
 
 div#header {
-	text-align: left;
-	padding: 0.5em;
-	border-bottom: solid black;
-	border-width: thin;
+	text-align: center;
+	padding: 3em;
 	text-indent: 5px;
+    background: url("../resources/images/header_logo.png") no-repeat;
+    border-width: thin;
+    border-color: #87F25D;
 }
 
 div#content {
 	text-align: left;
-	text-indent: 5px;
+	margin: 5px;
 }
 
 div#page {
 	text-align: left;
 	margin: 0 auto;
-	width: 950px;
+	width: 800px;
 	padding: 0;
 	border-width: thin;
 	border-style: solid;
