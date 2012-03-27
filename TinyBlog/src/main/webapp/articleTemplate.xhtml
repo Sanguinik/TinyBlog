@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<h:outputStylesheet library="css" name="style.css" />
+
+	<h:form>
+
+		<h2>
+			<h:outputText value="Titel des Artikels" />
+		</h2>
+		<h:outputText
+			value="Ich bin der Beispieltext dieses Artikels. 
+			Ich bin kurz und umfasse nur wenige Zeichen. Denn 
+			ich bin nur eine Vorschau auf den kompletten Text 
+			des Artikels. Also klicke mich an und lies mich ganz! ..." />
+		<br/>
+		<h:commandLink value="Alles lesen" action="fullArticle"/>
+		<hr/>
+		<h:panelGrid columns="2">
+			<h:outputText value="Autor: Anonymus"/>
+			<h:outputText value="Veröffentlicht am: 27.3.2012"/>
+			<h:commandLink value="Kommentare(#{authenticationContextBean.loggedIn})" action="fullArticle"/>
+			<h:commandLink value="Artikel bearbeiten" action="editArticle" rendered="#{authenticationContextBean.loggedIn}"/>
+		</h:panelGrid>
+		
+	</h:form>
+
+</ui:composition>

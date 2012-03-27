@@ -66,7 +66,20 @@ div#content {
 	-moz-border-radius: 10px;
 	-khtml-border-radius: 10px;
 	padding: 20px;
+	background-color: #59C449;
 	 
+}
+
+div#articlePrev {
+
+	border-width: bold;
+	border-color: black;
+	border-style: solid;
+	-moz-border-radius: 10px;
+	-khtml-border-radius: 10px;
+	padding: 10px;
+	margin: 10px;
+	background-color: #87F25D;
 }
 
 div#page {

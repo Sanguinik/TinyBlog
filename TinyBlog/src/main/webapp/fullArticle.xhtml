@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>TinyBlog</title>
+</h:head>
+<h:body>
+
+	<h:outputStylesheet library="css" name="style.css" />
+
+	<ui:composition template="/template.xhtml">
+
+		<ui:define name="header">
+			<h1>
+				<h:outputText value=" Kompletter Artikel" />
+			</h1>
+		</ui:define>
+
+		<ui:define name="content">
+
+			<h:form>
+				<h:outputText value="Hier steht der komplette Artikel..." />
+				<br />
+				<hr />
+				<h:outputText value="Noch kein Kommentar vorhanden." />
+				
+				<hr />
+				<h:outputText value="Kommentar verfassen" />
+				<br />
+				<h:panelGrid columns="2">
+					<h:outputText value="Name: " />
+					<h:inputText required="true" requiredMessage="Bitte Namen angeben."  />
+					<h:outputText value="E-Mail: " />
+					<h:inputText required="true"
+						requiredMessage="Bitte E-Mail-Adresse angeben." />
+				</h:panelGrid>
+				<h:inputTextarea rows="5" cols="50" required="true" requiredMessage="Bitte einen Kommentar angeben"/>
+				<br/>
+				<h:commandButton value="Abschicken"/>
+				
+
+			</h:form>
+
+
+		</ui:define>
+	</ui:composition>
+
+
+
+</h:body>
+</html>

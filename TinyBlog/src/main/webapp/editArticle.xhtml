@@ -10,36 +10,35 @@
 </h:head>
 <h:body>
 
-
-
 	<h:outputStylesheet library="css" name="style.css" />
 
 	<ui:composition template="/template.xhtml">
 
 		<ui:define name="header">
 			<h1>
-				<h:outputText value=" Neuen Artikel erstellen" />
+				<h:outputText value=" Artikel bearbeiten" />
 			</h1>
 		</ui:define>
 
 		<ui:define name="content">
-
-
-
+		
+					   
+			
 			<h:form>
 				<h:outputLabel value="Titel des Artikels: " />
-				<h:inputText required="true" size="60"
-					requiredMessage="Der Titel darf nicht leer sein." />
-				<br />
-				<br />
-				<p:editor width="720" required="true"
-					requiredMessage="Der Artikel darf nicht leer sein." />
-				<br />
-				<h:commandButton value="Veröffentlichen" />
+				<h:inputText required="true" size="60" requiredMessage="Der Titel darf nicht leer sein."/>
+				<br/>
+				<br/>
+				<p:editor width="720" required="true" requiredMessage="Der Artikel darf nicht leer sein." />
+				<br/>
+				<h:panelGrid columns="2">
+					<h:commandButton value="Ändernungen speichern" />
+					<h:commandButton value="Artikel löschen" />
+				</h:panelGrid>
 			</h:form>
-
-
-
+			
+			
+			
 
 		</ui:define>
 	</ui:composition>

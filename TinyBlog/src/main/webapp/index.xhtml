@@ -13,9 +13,11 @@
 
 	<ui:composition template="/template.xhtml">
 		<ui:define name="content">
-			<p>Herzlich Willkommen im TinyBlog!</p>
+			<h:outputText value="Herzlich Willkommen im TinyBlog!" />
 			
-			
+			<div id="articlePrev">
+				<ui:include src="/articleTemplate.xhtml" />
+			</div>
 
 		</ui:define>
 	</ui:composition>
