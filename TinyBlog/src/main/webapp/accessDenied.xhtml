@@ -15,24 +15,19 @@
 
 		<ui:define name="header">
 			<h1>
-				<h:outputText value=" Login" />
+				<h:outputText value=" Zugriff verweigert" />
 			</h1>
 		</ui:define>
 
 		<ui:define name="content">
+		
+		<h:form>
+			<h:outputText value="Dieser Bereich kann nur von eingeloggten
+			 Nutzern aufgerufen werden." />
+			 <br />
+			<h:commandLink value="Zum Login" action="login"/>
+		</h:form>
 
-				<h:form>
-					<h:panelGrid columns="2">
-						<h:outputText value="E-Mail" />
-						<h:inputText required="true"
-							requiredMessage="Bitte E-Mail-Adresse eingeben." />
-						<h:outputText value="Passwort" />
-						<h:inputSecret required="true"
-							requiredMessage="Bitte Passwort eingeben." />
-					</h:panelGrid>
-					<br />
-					<h:commandButton value="Login" action="#{authenticationContextBean.login}"/>
-				</h:form>
 
 		</ui:define>
 	</ui:composition>

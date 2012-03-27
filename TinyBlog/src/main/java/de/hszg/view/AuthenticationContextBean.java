@@ -28,7 +28,7 @@ public class AuthenticationContextBean {
 		
 		loggedIn = true;
 		
-		return "login";
+		return "index";
 	}
 	
 	public String logout(){
