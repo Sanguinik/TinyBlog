@@ -23,6 +23,10 @@
 			<from-outcome>logout</from-outcome>
 			<to-view-id>/logout.xhtml</to-view-id>
 		</navigation-case>
+		<navigation-case>
+			<from-outcome>newArticle</from-outcome>
+			<to-view-id>/newArticle.xhtml</to-view-id>
+		</navigation-case>
 	</navigation-rule>
 
 </faces-config>

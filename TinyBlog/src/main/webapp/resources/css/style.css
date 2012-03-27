@@ -59,7 +59,14 @@ div#header {
 
 div#content {
 	text-align: left;
-	margin: 5px;
+	margin: 15px;
+	border-width: bold;
+	border-color: black;
+	border-style: solid;
+	-moz-border-radius: 10px;
+	-khtml-border-radius: 10px;
+	padding: 20px;
+	 
 }
 
 div#page {

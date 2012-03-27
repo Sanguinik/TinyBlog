@@ -13,6 +13,9 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class AuthenticationContextBean {
 	
+	public AuthenticationContextBean(){
+		
+	}
 	
 	
 	private boolean loggedIn;

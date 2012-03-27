@@ -12,8 +12,8 @@
 		<h:outputText value=" | " />
 		<h:commandLink action="#{authenticationContextBean.login}" value="Login" rendered="#{not authenticationContextBean.loggedIn}" />
 		<h:commandLink action="#{authenticationContextBean.logout}" value="Logout" rendered="#{authenticationContextBean.loggedIn}" />
-		<h:outputText value=" | " />
-		<h:commandLink action="index" value="Neuer Artikel" rendered="#{authenticationContextBean.loggedIn}"/>
+		<h:outputText value=" | " rendered="#{authenticationContextBean.loggedIn}"/>
+		<h:commandLink action="newArticle" value="Neuer Artikel" rendered="#{authenticationContextBean.loggedIn}"/>
 
 	</h:form>
 
