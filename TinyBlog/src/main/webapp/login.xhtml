@@ -20,10 +20,19 @@
 		</ui:define>
 
 		<ui:define name="content">
-		
-			<p>Hier entsteht der Login</p>
-			
-			
+
+				<h:form>
+					<h:panelGrid columns="2">
+						<h:outputText value="E-Mail" />
+						<h:inputText required="true"
+							requiredMessage="Bitte E-Mail-Adresse eingeben." />
+						<h:outputText value="Passwort" />
+						<h:inputSecret required="true"
+							requiredMessage="Bitte Passwort eingeben." />
+					</h:panelGrid>
+					<br />
+					<h:commandButton value="Login" action="index"/>
+				</h:form>
 
 		</ui:define>
 	</ui:composition>
