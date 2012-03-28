@@ -23,6 +23,7 @@
 			<h:outputText value="Autor: Anonymus"/>
 			<h:outputText value="Veröffentlicht am: 27.3.2012"/>
 			<h:commandLink value="Kommentare(#{authenticationContextBean.loggedIn})" action="fullArticle"/>
+			<h:panelGroup rendered="#{not authenticationContextBean.loggedIn}"/>
 			<h:commandLink value="Artikel bearbeiten" action="editArticle" rendered="#{authenticationContextBean.loggedIn}"/>
 		</h:panelGrid>
 		
