@@ -21,24 +21,28 @@
 		</ui:define>
 
 		<ui:define name="content">
-		
-					   
-			
+
+
+
 			<h:form>
 				<h:outputLabel value="Titel des Artikels: " />
-				<h:inputText required="true" size="60" requiredMessage="Der Titel darf nicht leer sein."/>
-				<br/>
-				<br/>
-				<p:editor width="720" required="true" requiredMessage="Der Artikel darf nicht leer sein." />
-				<br/>
+				<h:inputText id="title" required="true" size="60"
+					requiredMessage="Der Titel darf nicht leer sein." />
+				<br />
+				<h:message for="title" styleClass="errMessage" />
+				<br />
+				<p:editor id="editor" width="720" required="true"
+					requiredMessage="Der Artikel darf nicht leer sein." />
+				<h:message for="editor" styleClass="errMessage" />
+				<br />
 				<h:panelGrid columns="2">
 					<h:commandButton value="Ändernungen speichern" />
 					<h:commandButton value="Artikel löschen" />
 				</h:panelGrid>
 			</h:form>
-			
-			
-			
+
+
+
 
 		</ui:define>
 	</ui:composition>

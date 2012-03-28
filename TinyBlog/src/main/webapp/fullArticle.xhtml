@@ -31,14 +31,18 @@
 				<hr />
 				<h:outputText value="Kommentar verfassen" />
 				<br />
-				<h:panelGrid columns="2">
+				<h:panelGrid columns="3">
 					<h:outputText value="Name: " />
-					<h:inputText required="true" requiredMessage="Bitte Namen angeben."  />
+					<h:inputText id="name" required="true" requiredMessage="Bitte Namen angeben."  />
+					<h:message for="name" styleClass="errMessage"/>
 					<h:outputText value="E-Mail: " />
-					<h:inputText required="true"
+					<h:inputText id="email" required="true"
 						requiredMessage="Bitte E-Mail-Adresse angeben." />
+					<h:message for="email" styleClass="errMessage"/>
 				</h:panelGrid>
-				<h:inputTextarea rows="5" cols="50" required="true" requiredMessage="Bitte einen Kommentar angeben"/>
+				<h:inputTextarea id="text" rows="5" cols="50" required="true" requiredMessage="Bitte einen Kommentar angeben"/>
+				<br/>
+				<h:message for="text" styleClass="errMessage"/>
 				<br/>
 				<h:commandButton value="Abschicken"/>
 				
