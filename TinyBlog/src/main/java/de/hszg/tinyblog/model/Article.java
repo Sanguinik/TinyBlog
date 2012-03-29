@@ -62,6 +62,14 @@ public class Article {
 		return Collections.unmodifiableSet(comments);
 
 	}
+	
+	/**
+	 * 
+	 * @return the number of entries in an unmodifiable Set of comments
+	 */
+	public int getNumberOfComments(){
+		return Collections.unmodifiableSet(comments).size();
+	}
 
 	public Date getPublishingDate() {
 		return publishingDate;

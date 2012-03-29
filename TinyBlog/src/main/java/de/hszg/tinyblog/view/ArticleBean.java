@@ -10,6 +10,7 @@ import de.hszg.tinyblog.model.User;
 
 @ManagedBean
 public class ArticleBean {
+	
 
 	private List<Article> articles = new ArrayList<Article>();
 
@@ -28,6 +29,10 @@ public class ArticleBean {
 		return articles;
 	}
 	
+	public String showFullArticle(){
+		
+		return "fullArticle";
+	}
 	
 	
 }

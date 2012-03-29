@@ -15,32 +15,12 @@
 	<ui:composition template="/template.xhtml">
 		<ui:define name="content">
 
-			<div id="articlePrev">
-				<ui:include src="/articleTemplate.xhtml" />
-			</div>
-			<hr />
-			<div id="articlePrev">
-				<ui:include src="/articleTemplate.xhtml" />
-			</div>
-			<hr />
-			<h:form>
-				<p:panel header="Titel des Artikels">
-					<h:outputText
-						value="Das ist die Vorschau mit einem Panel von Primefaces." />
-					<hr />
-					<h:panelGrid columns="4" cellspacing="10">
-						<h:outputText value="Autor: Anonymus" />
-						<h:outputText value="Veröffentlicht am: 27.3.2012" />
-						<h:commandLink
-							value="Kommentare(#{authenticationContextBean.loggedIn})"
-							action="fullArticle" />
-						<h:panelGroup rendered="#{not authenticationContextBean.loggedIn}" />
-
-						<h:commandLink value="Artikel bearbeiten" action="editArticle"
-							rendered="#{authenticationContextBean.loggedIn}" />
-					</h:panelGrid>
-				</p:panel>
-			</h:form>
+			<ui:repeat var="article" value="#{articleBean.articles}">
+				<div id="articlePrev">
+					<ui:include src="/articleTemplate.xhtml" />
+				</div>
+				<hr />
+			</ui:repeat>
 
 		</ui:define>
 	</ui:composition>

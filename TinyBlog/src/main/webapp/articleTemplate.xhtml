@@ -6,27 +6,30 @@
 
 	<h:outputStylesheet library="css" name="style.css" />
 
-	<h:form>
+					<h:form>
 
-		<h2>
-			<h:outputText value="Titel des Artikels" />
-		</h2>
-		<h:outputText
-			value="Ich bin der Beispieltext dieses Artikels. 
-			Ich bin kurz und umfasse nur wenige Zeichen. Denn 
-			ich bin nur eine Vorschau auf den kompletten Text 
-			des Artikels. Also klicke mich an und lies mich ganz! ..." />
-		<br/>
-		<h:commandLink value="Alles lesen" action="fullArticle"/>
-		<hr/>
-		<h:panelGrid columns="4" cellspacing="10">
-			<h:outputText value="Autor: Anonymus"/>
-			<h:outputText value="Veröffentlicht am: 27.3.2012"/>
-			<h:commandLink value="Kommentare(#{authenticationContextBean.loggedIn})" action="fullArticle"/>
-			<h:panelGroup rendered="#{not authenticationContextBean.loggedIn}"/>
-			<h:commandLink value="Artikel bearbeiten" action="editArticle" rendered="#{authenticationContextBean.loggedIn}"/>
-		</h:panelGrid>
-		
-	</h:form>
+						<h2>
+							<h:outputText value="#{article.title}" />
+						</h2>
+						<h:outputText
+							value="#{article.content}" />
+						<br />
+						<h:commandLink value="Alles lesen" action="fullArticle" />
+						<hr />
+						<h:panelGrid columns="4" cellspacing="10">
+							<h:outputText value="Autor: #{article.user.name}" />
+							<h:outputText value="#{article.publishingDate}">
+								<f:convertDateTime type="date" pattern="dd.MM.yyyy, HH:mm:ss" timeZone="Europe/Berlin" />
+							</h:outputText>
+							<h:commandLink
+								value="Kommentare(#{article.numberOfComments})"
+								action="#{articleBean.showFullArticle}" />
+							<h:panelGroup
+								rendered="#{not authenticationContextBean.loggedIn}" />
+							<h:commandLink value="Artikel bearbeiten" action="editArticle"
+								rendered="#{authenticationContextBean.loggedIn}" />
+						</h:panelGrid>
+
+					</h:form>
 
 </ui:composition>
