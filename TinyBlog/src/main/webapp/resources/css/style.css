@@ -75,6 +75,10 @@ div#footer {
 	text-indent: 5px;
 }
 
+div#footer a{
+	color: darkggreen;
+}
+
 .picture {
 	width: 100px;
 	height: 100px;

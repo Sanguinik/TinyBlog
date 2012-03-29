@@ -1,4 +1,4 @@
-package de.hszg.model;
+package de.hszg.tinyblog.model;
 
 /**
  * 
