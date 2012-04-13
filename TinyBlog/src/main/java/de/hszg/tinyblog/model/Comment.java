@@ -2,14 +2,23 @@ package de.hszg.tinyblog.model;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /**
  * This is the model class for the comments.
  * @author marlene
  *
  */
 
+@Entity
 public class Comment {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long id;
 	private String content;
 	private Date publishingDate;
 	private User user;

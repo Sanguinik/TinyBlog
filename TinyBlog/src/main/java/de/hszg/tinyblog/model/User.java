@@ -1,5 +1,10 @@
 package de.hszg.tinyblog.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /**
  * 
  * This is the model class for the user.
@@ -7,8 +12,12 @@ package de.hszg.tinyblog.model;
  * @author marlene
  *
  */
+@Entity
 public class User {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long id;
 	private String name;
 	private String password;
 	private String email;

@@ -9,21 +9,20 @@
 					<h:form>
 
 						<h2>
-							<h:outputText value="#{article.title}" />
+							<h:commandLink value="Title of the Article" action="fullArticle"/>
 						</h2>
 						<h:outputText
-							value="#{article.content}" />
+							value="Content of the article" />
 						<br />
 						<h:commandLink value="Alles lesen" action="fullArticle" />
 						<hr />
 						<h:panelGrid columns="4" cellspacing="10">
-							<h:outputText value="Autor: #{article.user.name}" />
-							<h:outputText value="#{article.publishingDate}">
-								<f:convertDateTime type="date" pattern="dd.MM.yyyy, HH:mm:ss" timeZone="Europe/Berlin" />
+							<h:outputText value="Autor: Autor des Articles" />
+							<h:outputText value="30.3.2012">
 							</h:outputText>
 							<h:commandLink
-								value="Kommentare(#{article.numberOfComments})"
-								action="#{articleBean.showFullArticle}" />
+								value="Kommentare(0)"
+								action="fullArticle" />
 							<h:panelGroup
 								rendered="#{not authenticationContextBean.loggedIn}" />
 							<h:commandLink value="Artikel bearbeiten" action="editArticle"
