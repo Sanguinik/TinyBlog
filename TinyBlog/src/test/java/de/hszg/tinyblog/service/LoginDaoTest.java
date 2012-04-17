@@ -2,7 +2,7 @@ package de.hszg.tinyblog.service;
 
 import org.junit.Test;
 
-public class LoginServiceTest {
+public class LoginDaoTest {
 
 	@Test
 	public void loginTest() {

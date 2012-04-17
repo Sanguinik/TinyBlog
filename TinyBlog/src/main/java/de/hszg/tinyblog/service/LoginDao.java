@@ -2,7 +2,7 @@ package de.hszg.tinyblog.service;
 
 import de.hszg.tinyblog.model.User;
 
-public interface LoginService {
+public interface LoginDao {
 	
 	/**
 	* This method logs a user with its correct password in

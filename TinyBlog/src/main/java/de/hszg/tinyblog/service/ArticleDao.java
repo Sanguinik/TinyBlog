@@ -1,5 +1,7 @@
 package de.hszg.tinyblog.service;
 
+import java.util.List;
+
 import de.hszg.tinyblog.model.Article;
 
 /**
@@ -8,7 +10,7 @@ import de.hszg.tinyblog.model.Article;
  *
  */
 
-public interface ArticleService {
+public interface ArticleDao {
 
 	/**
 	* This method adds a new article to the database
@@ -31,8 +33,15 @@ public interface ArticleService {
 	/**
 	 * This method gets an article by its id
 	 * @param id The of the article to be found
+	 * @return the article with the given id
 	 */
-	void findArticleById(long id);
+	Article findArticleById(long id);
+	
+	/**
+	 * This method returns all existing articles
+	 * @return a list of all existing articles
+	 */
+	List<Article> findAllArticles();
 
 	
 }

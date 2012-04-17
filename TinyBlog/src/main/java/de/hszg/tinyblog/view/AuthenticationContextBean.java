@@ -2,8 +2,10 @@ package de.hszg.tinyblog.view;
 
 
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import java.io.Serializable;
+
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
 
 /**
  * Temporaere Klasse, 
@@ -11,14 +13,15 @@ import javax.faces.bean.SessionScoped;
  * AuthenticationContext koennte Daten zum aktuellen Nutzer enthalten
  */
 
-@ManagedBean
+@Named
 @SessionScoped
-public class AuthenticationContextBean {
+public class AuthenticationContextBean implements Serializable{
 	
 
+	private static final long serialVersionUID = -3185273713868882607L;
 
 	public AuthenticationContextBean(){
-		
+
 	}
 	
 	

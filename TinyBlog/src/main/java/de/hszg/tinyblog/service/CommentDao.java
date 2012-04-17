@@ -3,7 +3,7 @@ package de.hszg.tinyblog.service;
 import de.hszg.tinyblog.model.Article;
 import de.hszg.tinyblog.model.Comment;
 
-public interface CommentService {
+public interface CommentDao {
 	
 	/**
 	* this method adds a comment to an article in the database
