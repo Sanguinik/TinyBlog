@@ -1,14 +1,18 @@
-package de.hszg.tinyblog.model;
+package de.hszg.tinyblog.persistence.model;
 
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 
 /**
@@ -26,11 +30,17 @@ public class Article {
 	private long id;
 	private String title;
 	private String content;
+	@Temporal(TemporalType.DATE)
 	private Date publishingDate;
 	private Set<Comment> comments;
+	@ManyToOne(cascade=CascadeType.PERSIST)
 	private User user;
 
 
+	public Article(){
+		
+	}
+	
 	/**
 	 * This constructor is used to create a new article.
 	 * 
@@ -40,6 +50,7 @@ public class Article {
 	 */
 
 	public Article(String title, String content, User user) {
+		
 		publishingDate = new Date();
 		comments = new HashSet<Comment>();
 		this.title = title;

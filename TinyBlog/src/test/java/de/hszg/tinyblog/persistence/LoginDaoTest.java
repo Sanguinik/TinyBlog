@@ -1,4 +1,4 @@
-package de.hszg.tinyblog.service;
+package de.hszg.tinyblog.persistence;
 
 import org.junit.Test;
 

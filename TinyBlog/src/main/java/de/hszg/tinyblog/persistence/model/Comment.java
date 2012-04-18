@@ -1,4 +1,4 @@
-package de.hszg.tinyblog.model;
+package de.hszg.tinyblog.persistence.model;
 
 import java.util.Date;
 
@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * This is the model class for the comments.
@@ -20,11 +22,16 @@ public class Comment {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	private String content;
+	@Temporal(TemporalType.DATE)
 	private Date publishingDate;
 	private User user;
 	private String name;
 	private String email;
 
+	
+	public Comment(){
+		
+	}
 	
 	/**
 	 * This constructor is used for comments created by users that are logged in.

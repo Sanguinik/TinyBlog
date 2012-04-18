@@ -1,6 +1,6 @@
-package de.hszg.tinyblog.service;
+package de.hszg.tinyblog.persistence;
 
-import de.hszg.tinyblog.model.User;
+import de.hszg.tinyblog.persistence.model.User;
 
 public interface LoginDao {
 	

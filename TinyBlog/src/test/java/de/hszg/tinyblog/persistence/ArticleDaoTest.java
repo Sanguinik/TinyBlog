@@ -1,4 +1,4 @@
-package de.hszg.tinyblog.service;
+package de.hszg.tinyblog.persistence;
 
 import static org.junit.Assert.*;
 
@@ -7,8 +7,10 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.hszg.tinyblog.model.Article;
-import de.hszg.tinyblog.model.User;
+import de.hszg.tinyblog.persistence.ArticleDao;
+import de.hszg.tinyblog.persistence.ArticleDaoMock;
+import de.hszg.tinyblog.persistence.model.Article;
+import de.hszg.tinyblog.persistence.model.User;
 
 public class ArticleDaoTest {
 	

@@ -4,9 +4,9 @@
 	version="2.0" xmlns="http://java.sun.com/xml/ns/persistence">
 	<persistence-unit name="testdb" transaction-type="RESOURCE_LOCAL">
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-		<class>de.hszg.tinyblog.model.Article</class>
-		<class>de.hszg.tinyblog.model.Comment</class>
-		<class>de.hszg.tinyblog.model.User</class>
+		<class>de.hszg.tinyblog.persistence.model.Article</class>
+		<class>de.hszg.tinyblog.persistence.model.Comment</class>
+		<class>de.hszg.tinyblog.persistence.model.User</class>
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver" />
 			<property name="javax.persistence.jdbc.url" value="jdbc:hsqldb:mem:testdb" />

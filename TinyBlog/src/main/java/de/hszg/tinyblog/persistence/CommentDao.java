@@ -1,7 +1,7 @@
-package de.hszg.tinyblog.service;
+package de.hszg.tinyblog.persistence;
 
-import de.hszg.tinyblog.model.Article;
-import de.hszg.tinyblog.model.Comment;
+import de.hszg.tinyblog.persistence.model.Article;
+import de.hszg.tinyblog.persistence.model.Comment;
 
 public interface CommentDao {
 	

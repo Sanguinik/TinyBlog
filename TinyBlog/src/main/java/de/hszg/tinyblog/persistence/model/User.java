@@ -1,4 +1,4 @@
-package de.hszg.tinyblog.model;
+package de.hszg.tinyblog.persistence.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,6 +21,10 @@ public class User {
 	private String name;
 	private String password;
 	private String email;
+	
+	public User(){
+		
+	}
 	
 	/**
 	 * This constructor is used for creating a new user.

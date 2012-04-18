@@ -1,8 +1,8 @@
-package de.hszg.tinyblog.service;
+package de.hszg.tinyblog.persistence;
 
 import java.util.List;
 
-import de.hszg.tinyblog.model.Article;
+import de.hszg.tinyblog.persistence.model.Article;
 
 /**
  *  
