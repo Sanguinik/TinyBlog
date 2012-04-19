@@ -28,7 +28,7 @@ public interface ArticleDao {
 	* This method saves the changes of an edited article
 	* @param article The article which should be saved
 	*/
-	Article setArticle(Article article);
+	boolean editArticle(Article article);
 	
 	/**
 	 * This method gets an article by its id

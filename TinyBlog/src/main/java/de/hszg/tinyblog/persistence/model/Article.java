@@ -33,7 +33,7 @@ public class Article {
 	@Temporal(TemporalType.DATE)
 	private Date publishingDate;
 	private Set<Comment> comments;
-	@ManyToOne(cascade=CascadeType.PERSIST)
+	@ManyToOne
 	private User user;
 
 

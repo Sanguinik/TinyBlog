@@ -81,5 +81,9 @@ public class Comment {
 	public String getContent() {
 		return content;
 	}
+	
+	public long getId(){
+		return id;
+	}
 
 }

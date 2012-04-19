@@ -57,5 +57,8 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	public long getId(){
+		return id;
+	}
 
 }
