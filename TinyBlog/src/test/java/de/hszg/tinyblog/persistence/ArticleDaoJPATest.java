@@ -1,5 +1,6 @@
 package de.hszg.tinyblog.persistence;
 
+import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -111,4 +112,94 @@ public class ArticleDaoJPATest {
 		
 		assertEquals(0,articleDao.findAllArticles().size());
 	}
+	
+	@Test
+	public void testAddSameArticleFail(){
+		Article article = new Article(MY_TITLE, MY_CONTENT, user);
+		
+		assertTrue(articleDao.addArticle(article));
+		
+		assertEquals(1, articleDao.findAllArticles().size());
+		
+		Article article2 = new Article(MY_TITLE, MY_CONTENT, user);
+				
+		assertFalse(articleDao.addArticle(article2));
+		
+		assertEquals(1, articleDao.findAllArticles().size());
+		
+		
+			
+	}
+	
+	@Test
+	public void testEditArticle(){
+		Article article = new Article(MY_TITLE, MY_CONTENT, user);
+		
+		assertTrue(articleDao.addArticle(article));
+		
+		id = article.getId();
+		
+		article.setTitle(MY_OTHER_TITLE);
+		article.setContent(MY_OTHER_CONTENT);
+		
+		assertTrue(articleDao.editArticle(article));
+		
+		EntityManager entityManager = emf.createEntityManager();
+		Article foundArticle = entityManager.find(Article.class, id);
+		entityManager.close();
+		assertEquals(MY_OTHER_TITLE, foundArticle.getTitle());
+		assertEquals(MY_OTHER_CONTENT, foundArticle.getContent());
+	}
+	
+	@Test
+	public void testFindArticleById(){
+		
+		Article article = new Article(MY_TITLE, MY_CONTENT, user);
+		
+		assertTrue(articleDao.addArticle(article));
+		id = article.getId();
+		
+		Article foundArticle = articleDao.findArticleById(id);
+		
+		assertEquals(MY_TITLE, foundArticle.getTitle());
+		assertEquals(MY_CONTENT, foundArticle.getContent());
+	}
+	
+	@Test
+	public void testAddArticleFailNullParameters(){
+		Article article = new Article(null, MY_CONTENT, user);
+		assertFalse(articleDao.addArticle(article));
+		
+		article = new Article(MY_CONTENT, null, user);
+		assertFalse(articleDao.addArticle(article));
+		
+		article = new Article(MY_CONTENT, MY_CONTENT, null);
+		assertFalse(articleDao.addArticle(article));
+	}
+	
+	@Test
+	public void testAddArticleFailArticleMustNotBeNull(){
+		assertFalse(articleDao.addArticle(null));
+	}
+	
+	@Test
+	public void testEditArticleFailArticleMustNotBeNull(){
+		
+		assertFalse(articleDao.editArticle(null));
+	}
+	
+	@Test
+	public void testEditArticleFailNullParameters(){
+		Article article = new Article(MY_TITLE, MY_CONTENT, user);
+		assertTrue(articleDao.addArticle(article));
+		
+		article.setTitle(null);
+		assertFalse(articleDao.editArticle(article));
+		
+		article.setContent(null);
+		assertFalse(articleDao.editArticle(article));
+		
+	}
+	
+	
 }

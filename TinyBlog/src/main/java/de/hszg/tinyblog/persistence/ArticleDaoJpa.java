@@ -15,20 +15,33 @@ public class ArticleDaoJpa implements ArticleDao {
 
 	
 	private static final String PERSISTENCE_UNIT = "testdb";
-	//default scope for testing purposes
+	//default scope for testing purposes, there should be only one EntityManagerFactory
 	EntityManagerFactory emf = Persistence
 			.createEntityManagerFactory(PERSISTENCE_UNIT);
 
 	@Override
 	public boolean addArticle(Article article) {
+		
+		if( nullCheck(article)){
+			EntityManager entityManager = emf.createEntityManager();
+			
+			List<Article> articles = findAllArticles();
+			for(Article a : articles){
+				String foundTitle = a.getTitle();
+				if(article.getTitle() == foundTitle){
+					return false;
+				}
+			}
 
-		EntityManager entityManager = emf.createEntityManager();
+				entityManager.getTransaction().begin();
+				entityManager.persist(article);
+				entityManager.getTransaction().commit();
+				entityManager.close();
+				return true;
+		}
+		
+		return false;
 
-		entityManager.getTransaction().begin();
-		entityManager.persist(article);
-		entityManager.getTransaction().commit();
-		entityManager.close();
-		return true;
 
 	}
 
@@ -46,7 +59,17 @@ public class ArticleDaoJpa implements ArticleDao {
 
 	@Override
 	public boolean editArticle(Article article) {
-		// TODO Auto-generated method stub
+		if(nullCheck(article)){
+			
+		
+		EntityManager entityManager = emf.createEntityManager();
+		entityManager.getTransaction().begin();
+		entityManager.merge(article);
+		entityManager.getTransaction().commit();
+		entityManager.close();
+		
+		return true;
+		}
 		return false;
 	}
 
@@ -67,6 +90,18 @@ public class ArticleDaoJpa implements ArticleDao {
 		articles = q.getResultList();
 		
 		return articles;
+	}
+	
+	private boolean nullCheck(Article article){
+		if(article == null){
+			return false;
+		}else{
+			
+			if(article.getTitle() == null || article.getContent() == null || article.getUser() == null){
+				return false;
+			}
+			return true;
+		}
 	}
 
 }
