@@ -1,8 +1,7 @@
 package de.hszg.tinyblog.persistence;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -15,12 +14,13 @@ import org.junit.Test;
 import de.hszg.tinyblog.persistence.model.Article;
 import de.hszg.tinyblog.persistence.model.User;
 
-public class ArticleDaoJPATest {
+public class ArticleDaoJpaTest {
 
 	private static final String MY_CONTENT = "My content.";
 	private static final String MY_TITLE = "My title";
 	private static final String MY_OTHER_TITLE = "My other title";
 	private static final String MY_OTHER_CONTENT = "My other content";
+	private static final long RANDOM_ID = 42;
 	private long id;
 	private ArticleDao articleDao;
 	private User user = new User("Marlene", "secret", "marlene@example.org");
@@ -120,10 +120,8 @@ public class ArticleDaoJPATest {
 		assertTrue(articleDao.addArticle(article));
 		
 		assertEquals(1, articleDao.findAllArticles().size());
-		
-		Article article2 = new Article(MY_TITLE, MY_CONTENT, user);
 				
-		assertFalse(articleDao.addArticle(article2));
+		assertFalse(articleDao.addArticle(article));
 		
 		assertEquals(1, articleDao.findAllArticles().size());
 		
@@ -166,6 +164,21 @@ public class ArticleDaoJPATest {
 	}
 	
 	@Test
+	public void testFindArticleByIdFailNoArticlePersisted(){
+		
+		Article foundArticle = articleDao.findArticleById(RANDOM_ID);
+		assertNull(foundArticle);
+	}
+	
+	@Test
+	public void testFindArticleByIdFailIdNotAvailable(){
+		Article article = new Article(MY_TITLE, MY_CONTENT, user);
+		long articleId = article.getId();
+		long newId = articleId + 1;
+		assertNull(articleDao.findArticleById(newId));
+	}
+	
+	@Test
 	public void testAddArticleFailNullParameters(){
 		Article article = new Article(null, MY_CONTENT, user);
 		assertFalse(articleDao.addArticle(article));
@@ -199,6 +212,11 @@ public class ArticleDaoJPATest {
 		article.setContent(null);
 		assertFalse(articleDao.editArticle(article));
 		
+	}
+	
+	@Test
+	public void testRemoveArticleFailArticleMustNotBeNull(){
+		assertFalse(articleDao.removeArticle(null));
 	}
 	
 	

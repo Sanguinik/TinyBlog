@@ -2,7 +2,7 @@ package de.hszg.tinyblog.persistence;
 
 import org.junit.Test;
 
-public class CommentDaoTest {
+public class CommentDaoJpaTest {
 
 	@Test
 	public void addCommentTest() {

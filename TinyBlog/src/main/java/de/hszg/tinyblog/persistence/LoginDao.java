@@ -5,19 +5,20 @@ import de.hszg.tinyblog.persistence.model.User;
 public interface LoginDao {
 	
 	/**
-	* This method logs a user with its correct password in
+	* This method logs a user with its correct password in.
+	* @param user The User who do the login.
+	* @param password The password is typed in by the user
+	* @return true if the password was correct.
 	*/
 	boolean login(User user, String password);
 
 	/**
 	* This method performs the logout for a user
+	* @return true if the logout was successful.
 	*/
 	boolean logout();
 
-	/**
-	* This method proves if a password is correct or not.
-	*/
-	boolean checkPassword(String password);
+
 
 
 }

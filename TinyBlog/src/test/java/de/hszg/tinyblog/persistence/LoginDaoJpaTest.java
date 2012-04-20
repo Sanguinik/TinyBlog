@@ -2,7 +2,7 @@ package de.hszg.tinyblog.persistence;
 
 import org.junit.Test;
 
-public class LoginDaoTest {
+public class LoginDaoJpaTest {
 
 	@Test
 	public void loginTest() {

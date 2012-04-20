@@ -6,7 +6,6 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import de.hszg.tinyblog.persistence.model.Article;
@@ -23,21 +22,21 @@ public class ArticleDaoJpa implements ArticleDao {
 	public boolean addArticle(Article article) {
 		
 		if( nullCheck(article)){
-			EntityManager entityManager = emf.createEntityManager();
 			
-			List<Article> articles = findAllArticles();
-			for(Article a : articles){
-				String foundTitle = a.getTitle();
-				if(article.getTitle() == foundTitle){
-					return false;
-				}
+			long foundId = article.getId();
+			Article foundArticle = findArticleById(foundId);
+			if(foundArticle != null){
+				return false;
 			}
+			
+			EntityManager entityManager = emf.createEntityManager();
 
 				entityManager.getTransaction().begin();
 				entityManager.persist(article);
 				entityManager.getTransaction().commit();
 				entityManager.close();
 				return true;
+			
 		}
 		
 		return false;
@@ -47,6 +46,9 @@ public class ArticleDaoJpa implements ArticleDao {
 
 	@Override
 	public boolean removeArticle(Article article) {
+		
+		if(nullCheck(article)){
+		
 		EntityManager entityManager = emf.createEntityManager();
 		article = entityManager.find(Article.class, article.getId());
 		entityManager.getTransaction().begin();
@@ -55,6 +57,8 @@ public class ArticleDaoJpa implements ArticleDao {
 		entityManager.close();
 			
 		return true;
+		}
+		return false;
 	}
 
 	@Override
