@@ -81,6 +81,15 @@
 					<target>1.6</target>
 				</configuration>
 			</plugin>
+			<!-- This configuration is needed for clean up the EntityManagerFactory in tests.-->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.12</version>
+				<configuration>
+					<forkMode>always</forkMode>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 </project>
