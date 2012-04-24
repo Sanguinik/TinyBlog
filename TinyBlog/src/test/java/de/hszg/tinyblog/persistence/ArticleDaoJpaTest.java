@@ -100,6 +100,38 @@ public class ArticleDaoJpaTest {
 		assertEquals(2, articleDao.findAllArticles().size());
 	}
 
+	
+	@Test
+	public void testAddSameArticleFail(){
+		Article article = new Article(MY_TITLE, MY_CONTENT, user);
+		
+		assertTrue(articleDao.addArticle(article));
+		
+		assertEquals(1, articleDao.findAllArticles().size());
+				
+		assertFalse(articleDao.addArticle(article));
+		
+		assertEquals(1, articleDao.findAllArticles().size());	
+			
+	}
+	
+	@Test
+	public void testAddArticleFailNullParameters(){
+		Article article = new Article(null, MY_CONTENT, user);
+		assertFalse(articleDao.addArticle(article));
+		
+		article = new Article(MY_CONTENT, null, user);
+		assertFalse(articleDao.addArticle(article));
+		
+		article = new Article(MY_CONTENT, MY_CONTENT, null);
+		assertFalse(articleDao.addArticle(article));
+	}
+	
+	@Test
+	public void testAddArticleFailArticleMustNotBeNull(){
+		assertFalse(articleDao.addArticle(null));
+	}
+	
 	@Test
 	public void testRemoveArticle(){
 		Article article = new Article(MY_TITLE, MY_CONTENT, user);
@@ -114,21 +146,10 @@ public class ArticleDaoJpaTest {
 	}
 	
 	@Test
-	public void testAddSameArticleFail(){
-		Article article = new Article(MY_TITLE, MY_CONTENT, user);
-		
-		assertTrue(articleDao.addArticle(article));
-		
-		assertEquals(1, articleDao.findAllArticles().size());
-				
-		assertFalse(articleDao.addArticle(article));
-		
-		assertEquals(1, articleDao.findAllArticles().size());
-		
-		
-			
+	public void testRemoveArticleFailArticleMustNotBeNull(){
+		assertFalse(articleDao.removeArticle(null));
 	}
-	
+
 	@Test
 	public void testEditArticle(){
 		Article article = new Article(MY_TITLE, MY_CONTENT, user);
@@ -147,6 +168,25 @@ public class ArticleDaoJpaTest {
 		entityManager.close();
 		assertEquals(MY_OTHER_TITLE, foundArticle.getTitle());
 		assertEquals(MY_OTHER_CONTENT, foundArticle.getContent());
+	}
+	
+	@Test
+	public void testEditArticleFailArticleMustNotBeNull(){
+		
+		assertFalse(articleDao.editArticle(null));
+	}
+	
+	@Test
+	public void testEditArticleFailNullParameters(){
+		Article article = new Article(MY_TITLE, MY_CONTENT, user);
+		assertTrue(articleDao.addArticle(article));
+		
+		article.setTitle(null);
+		assertFalse(articleDao.editArticle(article));
+		
+		article.setContent(null);
+		assertFalse(articleDao.editArticle(article));
+		
 	}
 	
 	@Test
@@ -178,46 +218,8 @@ public class ArticleDaoJpaTest {
 		assertNull(articleDao.findArticleById(newId));
 	}
 	
-	@Test
-	public void testAddArticleFailNullParameters(){
-		Article article = new Article(null, MY_CONTENT, user);
-		assertFalse(articleDao.addArticle(article));
-		
-		article = new Article(MY_CONTENT, null, user);
-		assertFalse(articleDao.addArticle(article));
-		
-		article = new Article(MY_CONTENT, MY_CONTENT, null);
-		assertFalse(articleDao.addArticle(article));
-	}
 	
-	@Test
-	public void testAddArticleFailArticleMustNotBeNull(){
-		assertFalse(articleDao.addArticle(null));
-	}
 	
-	@Test
-	public void testEditArticleFailArticleMustNotBeNull(){
-		
-		assertFalse(articleDao.editArticle(null));
-	}
-	
-	@Test
-	public void testEditArticleFailNullParameters(){
-		Article article = new Article(MY_TITLE, MY_CONTENT, user);
-		assertTrue(articleDao.addArticle(article));
-		
-		article.setTitle(null);
-		assertFalse(articleDao.editArticle(article));
-		
-		article.setContent(null);
-		assertFalse(articleDao.editArticle(article));
-		
-	}
-	
-	@Test
-	public void testRemoveArticleFailArticleMustNotBeNull(){
-		assertFalse(articleDao.removeArticle(null));
-	}
 	
 	
 }

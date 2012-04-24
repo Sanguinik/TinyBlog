@@ -1,6 +1,5 @@
 package de.hszg.tinyblog.persistence;
 
-import java.util.List;
 
 import de.hszg.tinyblog.persistence.model.Article;
 import de.hszg.tinyblog.persistence.model.Comment;
@@ -18,9 +17,10 @@ public interface CommentDao {
 	/**
 	* This method removes an comment from the database.
 	* @param comment The comment which should be removed.
+	* @param article The article where the comment should be removed.
 	* @return true if the transaction was successful.
 	*/
-	boolean removeComment(Comment comment);
+	boolean removeComment(Comment comment, Article article);
 	
 	/**
 	 * This method finds an comment by its id.
@@ -29,10 +29,5 @@ public interface CommentDao {
 	 */
 	Comment findCommentById(long id);
 	
-	/**
-	 * This method finds all Comments of an article.
-	 * @return A list with all comments of an article.
-	 */
-	List<Comment> findAllComments();
 
 }

@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -31,6 +32,7 @@ public class Article {
 	private String content;
 	@Temporal(TemporalType.DATE)
 	private Date publishingDate;
+	@OneToMany(orphanRemoval = true)
 	private Set<Comment> comments;
 	@ManyToOne
 	private User user;

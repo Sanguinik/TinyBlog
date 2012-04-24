@@ -57,6 +57,12 @@ public class Comment {
 		this.email = email;
 	}
 	
+	/**
+	 * Private constructor to avoid code duplication.
+	 * Is called with <code>this(content)</code>.
+	 * 
+	 * @param content 
+	 */
 	private Comment(String content){
 		publishingDate = new Date();
 		this.content = content;

@@ -101,7 +101,7 @@ public class ArticleDaoJpa implements ArticleDao {
 			return false;
 		}else{
 			
-			if(article.getTitle() == null || article.getContent() == null || article.getUser() == null){
+			if(article.getTitle() == null || article.getContent() == null){
 				return false;
 			}
 			return true;
