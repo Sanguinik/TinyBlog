@@ -21,7 +21,6 @@ public class User {
 	private String name;
 	private String password;
 	private String email;
-	private boolean loggedIn;
 	
 	public User(){
 		
@@ -62,12 +61,5 @@ public class User {
 		return id;
 	}
 
-	public boolean isLoggedIn() {
-		return loggedIn;
-	}
-
-	public void setLoggedIn(boolean isLoggedIn) {
-		this.loggedIn = isLoggedIn;
-	}
 
 }

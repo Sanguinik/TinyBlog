@@ -92,7 +92,7 @@ public class ArticleDaoJpa implements ArticleDao {
 		TypedQuery<Article> q = entityManager.createQuery("select a from Article a",Article.class);
 		List<Article> articles = new ArrayList<Article>();
 		articles = q.getResultList();
-		
+		entityManager.close();
 		return articles;
 	}
 	
