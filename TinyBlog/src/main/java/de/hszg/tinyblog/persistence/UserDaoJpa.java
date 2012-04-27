@@ -4,18 +4,14 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
 import de.hszg.tinyblog.persistence.model.User;
 
 public class UserDaoJpa implements UserDao {
 
-	private static final String PERSISTENCE_UNIT = "testdb";
-	// default scope for testing purposes, there should be only one
-	// EntityManagerFactory
-	EntityManagerFactory emf = Persistence
-			.createEntityManagerFactory(PERSISTENCE_UNIT);
+	
+	private EntityManagerFactory emf = EmfFactory.getInstance();
 
 	@Override
 	public User findUserByEmail(String email) {

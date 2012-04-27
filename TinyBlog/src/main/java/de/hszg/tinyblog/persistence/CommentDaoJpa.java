@@ -3,17 +3,13 @@ package de.hszg.tinyblog.persistence;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 import de.hszg.tinyblog.persistence.model.Article;
 import de.hszg.tinyblog.persistence.model.Comment;
 
 public class CommentDaoJpa implements CommentDao {
 	
-	private static final String PERSISTENCE_UNIT = "testdb";
-	//default scope for testing purposes, there should be only one EntityManagerFactory
-	EntityManagerFactory emf = Persistence
-			.createEntityManagerFactory(PERSISTENCE_UNIT);
+	private EntityManagerFactory emf = EmfFactory.getInstance();
 	private ArticleDao articleDao = new ArticleDaoJpa();
 
 	@Override

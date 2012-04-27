@@ -30,7 +30,7 @@ public class CommentDaoJpaTest {
 	@Before
 	public void setUp(){
 		commentDao = new CommentDaoJpa();
-		emf = ((CommentDaoJpa)commentDao).emf;
+		emf = EmfFactory.getInstance();
 		EntityManager entityManager = emf.createEntityManager();
 		entityManager.getTransaction().begin();
 		entityManager.persist(user);
@@ -43,6 +43,7 @@ public class CommentDaoJpaTest {
 	@After
 	public void tearDown(){
 		emf.close();
+		EmfFactory.reset();
 	}
 	
 	@Test

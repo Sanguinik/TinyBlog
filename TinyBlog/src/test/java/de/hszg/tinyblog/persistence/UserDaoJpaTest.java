@@ -26,7 +26,7 @@ public class UserDaoJpaTest {
 	@Before
 	public void setUp(){
 		userDao = new UserDaoJpa();
-		emf = ((UserDaoJpa)userDao).emf;
+		emf = EmfFactory.getInstance();
 		EntityManager entityManager = emf.createEntityManager();
 		entityManager.getTransaction().begin();
 		entityManager.persist(user);
@@ -38,6 +38,7 @@ public class UserDaoJpaTest {
 	@After
 	public void tearDown(){
 		emf.close();
+		EmfFactory.reset();
 	}
 
 	@Test

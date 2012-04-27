@@ -29,8 +29,7 @@ public class ArticleDaoJpaTest {
 	@Before
 	public void setUp() {
 		articleDao = new ArticleDaoJpa();
-		//get the EntityManagerFactory from ArticleDaoJpa
-		emf = ((ArticleDaoJpa) articleDao).emf;
+		emf = EmfFactory.getInstance();
 		EntityManager entityManager = emf.createEntityManager();
 		entityManager.getTransaction().begin();
 		entityManager.persist(user);
@@ -41,6 +40,7 @@ public class ArticleDaoJpaTest {
 	@After
 	public void tearDown(){
 		emf.close();
+		EmfFactory.reset();
 	}
 
 	@Test

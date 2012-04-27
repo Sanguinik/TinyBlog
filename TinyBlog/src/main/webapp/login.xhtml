@@ -25,11 +25,12 @@
 					<h:panelGrid columns="3">
 						<h:outputText value="E-Mail" />
 						<h:inputText id="email" required="true"
-							requiredMessage="Bitte E-Mail-Adresse eingeben." />
+							requiredMessage="Bitte E-Mail-Adresse eingeben." value="#{authenticationContextBean.email}" />
 						<h:message for="email" styleClass="errMessage"/>
 						<h:outputText value="Passwort" />
 						<h:inputSecret id="passwd" required="true"
-							requiredMessage="Bitte Passwort eingeben." />
+							requiredMessage="Bitte Passwort eingeben." value="#{authenticationContextBean.password}" 
+							/>
 						<h:message for="passwd" styleClass="errMessage"/>
 					</h:panelGrid>
 					<br />
