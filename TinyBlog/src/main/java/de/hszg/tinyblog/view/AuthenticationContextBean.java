@@ -2,8 +2,10 @@ package de.hszg.tinyblog.view;
 
 import java.io.Serializable;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import de.hszg.tinyblog.service.AuthenticationService;
 import de.hszg.tinyblog.service.AuthenticationServiceImpl;
@@ -33,6 +35,7 @@ public class AuthenticationContextBean implements Serializable {
 	}
 
 	public String login() {
+		FacesContext context = FacesContext.getCurrentInstance();
 
 		AuthenticationService authenticationService = new AuthenticationServiceImpl();
 
@@ -40,6 +43,9 @@ public class AuthenticationContextBean implements Serializable {
 			loggedIn = true;
 			return "index";
 		}
+
+		context.addMessage("inputForm:email", new FacesMessage(
+				"E-Mail-Adresse und/oder Passwort sind falsch."));
 
 		return null;
 	}
