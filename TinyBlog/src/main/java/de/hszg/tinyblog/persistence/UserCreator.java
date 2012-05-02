@@ -6,6 +6,7 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
+import de.hszg.tinyblog.persistence.model.Article;
 import de.hszg.tinyblog.persistence.model.User;
 
 /**
@@ -30,10 +31,15 @@ public class UserCreator implements ServletContextListener {
 	public void contextInitialized(final ServletContextEvent arg0) {
 
 		User user = new User("Admin", "admin", "admin@example.org");
+		Article article = new Article(
+				"My first article",
+				"This is an example for an article. Have fun with your new blog.",
+				user);
 
 		EntityManager entityManager = emf.createEntityManager();
 		entityManager.getTransaction().begin();
 		entityManager.persist(user);
+		entityManager.persist(article);
 		entityManager.getTransaction().commit();
 		entityManager.close();
 

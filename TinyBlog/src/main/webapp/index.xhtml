@@ -15,10 +15,12 @@
 	<ui:composition template="/template.xhtml">
 		<ui:define name="content">
 			
+			<ui:repeat var="article" value="#{articleOverviewBean.articleList}">
 				<div id="articlePrev">
 					<ui:include src="/articleTemplate.xhtml" />
 				</div>
 				<hr />
+			</ui:repeat>
 
 		</ui:define>
 	</ui:composition>
