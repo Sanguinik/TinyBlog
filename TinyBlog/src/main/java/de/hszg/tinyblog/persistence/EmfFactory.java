@@ -3,7 +3,7 @@ package de.hszg.tinyblog.persistence;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-public class EmfFactory {
+public final class EmfFactory {
 
 	private static final String PERSISTENCE_UNIT_NAME = "testdb";
 	private static EntityManagerFactory emf = Persistence

@@ -1,6 +1,10 @@
 package de.hszg.tinyblog.util;
 
-public class Validator {
+public final class Validator {
+
+	private Validator() {
+
+	}
 
 	public static boolean checkNotNull(final Object... objects) {
 		for (int i = 0; i < objects.length; i++) {
