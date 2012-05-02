@@ -11,8 +11,8 @@ import de.hszg.tinyblog.service.AuthenticationService;
 import de.hszg.tinyblog.service.AuthenticationServiceImpl;
 
 /**
- * Temporaere Klasse, TODO: Login,Logout in extra Controller auslagern
- * AuthenticationContext koennte Daten zum aktuellen Nutzer enthalten
+ * This managed bean is responsible for keeping a user logged in within a
+ * session and provides the methods for login and logout.
  */
 
 @ManagedBean
