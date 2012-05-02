@@ -10,15 +10,17 @@ import de.hszg.tinyblog.service.ArticleServiceImpl;
 public class FullArticleBean {
 
 	private Article article;
-	private ArticleService articleService;
 
+	/**
+	 * Empty constructor is needed for JSF
+	 */
 	public FullArticleBean() {
 
 	}
 
 	public String showFullArticle(final Article article) {
 		long articleId = article.getId();
-		articleService = new ArticleServiceImpl();
+		ArticleService articleService = new ArticleServiceImpl();
 		this.article = articleService.findArticleById(articleId);
 		return "fullArticle";
 	}

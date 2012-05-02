@@ -12,12 +12,10 @@ import de.hszg.tinyblog.service.ArticleServiceImpl;
 @ManagedBean
 public class ArticleOverviewBean {
 
-	private ArticleService articleService;
-
 	private List<Article> articleList = new ArrayList<Article>();
 
 	public ArticleOverviewBean() {
-		articleService = new ArticleServiceImpl();
+		ArticleService articleService = new ArticleServiceImpl();
 		articleList = articleService.findAllArticles();
 	}
 

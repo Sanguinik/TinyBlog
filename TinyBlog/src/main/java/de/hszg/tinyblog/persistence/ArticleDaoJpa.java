@@ -1,5 +1,7 @@
 package de.hszg.tinyblog.persistence;
 
+import static de.hszg.tinyblog.util.Validator.checkNotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,71 +13,68 @@ import de.hszg.tinyblog.persistence.model.Article;
 
 public class ArticleDaoJpa implements ArticleDao {
 
-	
-	
 	private EntityManagerFactory emf = EmfFactory.getInstance();
 
 	@Override
-	public boolean addArticle(Article article) {
-		
-		if( nullCheck(article)){
-			
+	public boolean addArticle(final Article article) {
+
+		if (nullCheck(article)) {
+
 			long foundId = article.getId();
 			Article foundArticle = findArticleById(foundId);
-			if(foundArticle != null){
+			if (foundArticle != null) {
 				return false;
 			}
-			
+
 			EntityManager entityManager = emf.createEntityManager();
 
-				entityManager.getTransaction().begin();
-				entityManager.persist(article);
-				entityManager.getTransaction().commit();
-				entityManager.close();
-				return true;
-			
-		}
-		
-		return false;
+			entityManager.getTransaction().begin();
+			entityManager.persist(article);
+			entityManager.getTransaction().commit();
+			entityManager.close();
+			return true;
 
+		}
+
+		return false;
 
 	}
 
 	@Override
-	public boolean removeArticle(Article article) {
-		
-		if(nullCheck(article)){
-		
-		EntityManager entityManager = emf.createEntityManager();
-		article = entityManager.find(Article.class, article.getId());
-		entityManager.getTransaction().begin();
-		entityManager.remove(article);
-		entityManager.getTransaction().commit();
-		entityManager.close();
-			
-		return true;
-		}
-		return false;
-	}
+	public boolean removeArticle(final Article article) {
 
-	@Override
-	public boolean editArticle(Article article) {
-		if(nullCheck(article)){
-			
-		
-		EntityManager entityManager = emf.createEntityManager();
-		entityManager.getTransaction().begin();
-		entityManager.merge(article);
-		entityManager.getTransaction().commit();
-		entityManager.close();
-		
-		return true;
+		if (nullCheck(article)) {
+
+			EntityManager entityManager = emf.createEntityManager();
+			Article foundArticle = entityManager.find(Article.class,
+					article.getId());
+			entityManager.getTransaction().begin();
+			entityManager.remove(foundArticle);
+			entityManager.getTransaction().commit();
+			entityManager.close();
+
+			return true;
 		}
 		return false;
 	}
 
 	@Override
-	public Article findArticleById(long id) {
+	public boolean editArticle(final Article article) {
+		if (nullCheck(article)) {
+
+			EntityManager entityManager = emf.createEntityManager();
+			entityManager.getTransaction().begin();
+			entityManager.merge(article);
+			entityManager.getTransaction().commit();
+			entityManager.close();
+
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public Article findArticleById(final long id) {
 		EntityManager entityManager = emf.createEntityManager();
 		Article foundArticle = entityManager.find(Article.class, id);
 		entityManager.close();
@@ -84,24 +83,25 @@ public class ArticleDaoJpa implements ArticleDao {
 
 	@Override
 	public List<Article> findAllArticles() {
-		
+
 		EntityManager entityManager = emf.createEntityManager();
-		TypedQuery<Article> q = entityManager.createQuery("select a from Article a",Article.class);
+		TypedQuery<Article> q = entityManager.createQuery(
+				"select a from Article a", Article.class);
 		List<Article> articles = new ArrayList<Article>();
 		articles = q.getResultList();
 		entityManager.close();
 		return articles;
 	}
-	
-	private boolean nullCheck(Article article){
-		if(article == null){
+
+	private boolean nullCheck(final Article article) {
+
+		if (article == null) {
 			return false;
-		}else{
-			
-			if(article.getTitle() == null || article.getContent() == null || article.getUser() == null){
-				return false;
-			}
-			return true;
+		} else {
+
+			return checkNotNull(article.getTitle(), article.getContent(),
+					article.getUser());
+
 		}
 	}
 
