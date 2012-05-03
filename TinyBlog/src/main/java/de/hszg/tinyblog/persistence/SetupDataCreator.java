@@ -22,7 +22,8 @@ import de.hszg.tinyblog.persistence.model.User;
 @WebListener
 public class SetupDataCreator implements ServletContextListener {
 
-	static Logger logger = LoggerFactory.getLogger(SetupDataCreator.class);
+	private static Logger logger = LoggerFactory
+			.getLogger(SetupDataCreator.class);
 	private EntityManagerFactory emf = EmfFactory.getInstance();
 
 	@Override

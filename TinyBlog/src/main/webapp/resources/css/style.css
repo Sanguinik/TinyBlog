@@ -44,6 +44,11 @@ div#content {
 	
 }
 
+div#content a{
+	color : green;
+	text-decoration: none;
+}
+
 div#articlePrev { 
 
 	padding: 10px;

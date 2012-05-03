@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 
 public final class Validator {
 
-	static Logger logger = LoggerFactory.getLogger(Validator.class);
+	private static Logger logger = LoggerFactory.getLogger(Validator.class);
 
 	private Validator() {
 

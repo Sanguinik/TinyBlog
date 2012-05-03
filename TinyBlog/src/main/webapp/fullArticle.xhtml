@@ -3,6 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
@@ -25,6 +26,18 @@
 			<h:form>
 				<h:outputText value="#{fullArticleBean.article.content}" />
 				<br />
+				<hr />
+				<h:panelGrid columns="4" cellspacing="10">
+					<h:outputText value="Autor: #{fullArticleBean.article.user.name}" />
+					<h:outputText value="#{fullArticleBean.article.publishingDate}">
+						<f:convertDateTime type="date" pattern="dd.MM.yyyy, HH:mm:ss" timeZone="Europe/Berlin" />
+					</h:outputText>
+					<h:panelGroup
+								rendered="#{not authenticationContextBean.loggedIn}" />
+					<h:commandLink value="Artikel bearbeiten" action="editArticle"
+								rendered="#{authenticationContextBean.loggedIn}" />
+					<h:outputText value="Kommentare(#{fullArticleBean.article.numberOfComments})"/>
+				</h:panelGrid>
 				<hr />
 				<h:outputText value="Noch kein Kommentar vorhanden." />
 				
