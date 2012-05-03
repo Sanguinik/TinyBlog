@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * This validator is responsible for several validations of the application.
+ * This validator is responsible for internal validations of the application.
  * 
  * @author marlene
  * 
