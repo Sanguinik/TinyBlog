@@ -11,6 +11,13 @@ import javax.persistence.TypedQuery;
 
 import de.hszg.tinyblog.persistence.model.Article;
 
+/**
+ * This is the JPA implementation for the ArticleDao.
+ * 
+ * @author marlene
+ * 
+ */
+
 public class ArticleDaoJpa implements ArticleDao {
 
 	private EntityManagerFactory emf = EmfFactory.getInstance();

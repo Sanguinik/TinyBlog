@@ -6,6 +6,9 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import de.hszg.tinyblog.persistence.model.Article;
 import de.hszg.tinyblog.persistence.model.User;
 
@@ -17,14 +20,15 @@ import de.hszg.tinyblog.persistence.model.User;
  * 
  */
 @WebListener
-public class UserCreator implements ServletContextListener {
+public class SetupDataCreator implements ServletContextListener {
 
+	static Logger logger = LoggerFactory.getLogger(SetupDataCreator.class);
 	private EntityManagerFactory emf = EmfFactory.getInstance();
 
 	@Override
 	public void contextDestroyed(final ServletContextEvent arg0) {
 		emf.close();
-		System.out.println("AUF WIEDERSEHEN");
+		logger.info("Shut down, Servlet Context destroyed.");
 	}
 
 	@Override
@@ -43,7 +47,7 @@ public class UserCreator implements ServletContextListener {
 		entityManager.getTransaction().commit();
 		entityManager.close();
 
-		System.out.println("GUTEN TAG");
+		logger.info("Startup, Servlet Context initialized.");
 	}
 
 }

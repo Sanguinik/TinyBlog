@@ -23,7 +23,7 @@ public class UserCreatorTest {
 
 		assertEquals(0, q.getResultList().size());
 
-		UserCreator userCreator = new UserCreator();
+		SetupDataCreator userCreator = new SetupDataCreator();
 		userCreator.contextInitialized(null);
 
 		assertEquals(1, q.getResultList().size());

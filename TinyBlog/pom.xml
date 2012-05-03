@@ -25,17 +25,7 @@
 			<artifactId>primefaces</artifactId>
 			<version>3.2</version>
 		</dependency>
-		<dependency>
-			<groupId>org.primefaces.themes</groupId>
-			<artifactId>south-street</artifactId>
-			<version>1.0.2</version>
-		</dependency>
 
-		<dependency>
-			<groupId>org.jboss.weld.servlet</groupId>
-			<artifactId>weld-servlet</artifactId>
-			<version>1.1.6.Final</version>
-		</dependency>
 
 		<dependency>
 			<groupId>org.eclipse.persistence</groupId>
@@ -61,6 +51,16 @@
 			<version>3.0.1</version>
 		</dependency>
 
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-core</artifactId>
+			<version>1.0.2</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.0.2</version>
+		</dependency>
 	</dependencies>
 
 	<repositories>
