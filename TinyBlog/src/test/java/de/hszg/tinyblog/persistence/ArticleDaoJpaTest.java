@@ -13,6 +13,7 @@ import org.junit.Test;
 
 import de.hszg.tinyblog.persistence.model.Article;
 import de.hszg.tinyblog.persistence.model.User;
+import de.hszg.tinyblog.util.EmfFactory;
 
 public class ArticleDaoJpaTest {
 

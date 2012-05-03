@@ -7,6 +7,14 @@ import javax.persistence.EntityManagerFactory;
 
 import de.hszg.tinyblog.persistence.model.Article;
 import de.hszg.tinyblog.persistence.model.Comment;
+import de.hszg.tinyblog.util.EmfFactory;
+
+/**
+ * This is the JPA implementation of the CommentDao.
+ * 
+ * @author marlene
+ * 
+ */
 
 public class CommentDaoJpa implements CommentDao {
 

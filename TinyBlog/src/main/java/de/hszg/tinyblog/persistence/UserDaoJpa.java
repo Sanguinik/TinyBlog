@@ -7,14 +7,21 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
 
 import de.hszg.tinyblog.persistence.model.User;
+import de.hszg.tinyblog.util.EmfFactory;
+
+/**
+ * This is the JPA implementation for the UserDao.
+ * 
+ * @author marlene
+ * 
+ */
 
 public class UserDaoJpa implements UserDao {
 
-	
 	private EntityManagerFactory emf = EmfFactory.getInstance();
 
 	@Override
-	public User findUserByEmail(String email) {
+	public User findUserByEmail(final String email) {
 		if (email != null) {
 
 			EntityManager entityManager = emf.createEntityManager();

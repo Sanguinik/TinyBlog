@@ -24,6 +24,9 @@ public class AuthenticationContextBean implements Serializable {
 
 	private String password;
 
+	/**
+	 * Empty constructor is needed for JSF.
+	 */
 	public AuthenticationContextBean() {
 
 	}
@@ -34,6 +37,14 @@ public class AuthenticationContextBean implements Serializable {
 		return loggedIn;
 	}
 
+	/**
+	 * This method gets the email and the password out of the view and proves
+	 * them on their correctness in relation to the data is persisted in the
+	 * database.
+	 * 
+	 * @return index for going to the index-page oder null, to stay on the
+	 *         current page if the data was not correct.
+	 */
 	public String login() {
 		FacesContext context = FacesContext.getCurrentInstance();
 
@@ -49,6 +60,14 @@ public class AuthenticationContextBean implements Serializable {
 
 		return null;
 	}
+
+	/**
+	 * 
+	 * This method sets the boolean that is responsible for keeping a user
+	 * logged in within a session to false.
+	 * 
+	 * @return logout - for directing it to the logout-page.
+	 */
 
 	public String logout() {
 

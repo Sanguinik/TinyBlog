@@ -10,6 +10,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
 
 import de.hszg.tinyblog.persistence.model.Article;
+import de.hszg.tinyblog.util.EmfFactory;
 
 /**
  * This is the JPA implementation for the ArticleDao.

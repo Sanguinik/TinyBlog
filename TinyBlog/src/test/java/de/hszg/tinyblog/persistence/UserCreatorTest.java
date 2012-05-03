@@ -9,6 +9,8 @@ import javax.persistence.TypedQuery;
 import org.junit.Test;
 
 import de.hszg.tinyblog.persistence.model.User;
+import de.hszg.tinyblog.util.EmfFactory;
+import de.hszg.tinyblog.util.SetupDataCreator;
 
 public class UserCreatorTest {
 

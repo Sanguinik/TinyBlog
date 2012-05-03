@@ -5,6 +5,13 @@ import de.hszg.tinyblog.persistence.UserDao;
 import de.hszg.tinyblog.persistence.UserDaoJpa;
 import de.hszg.tinyblog.persistence.model.User;
 
+/**
+ * This is the implementation of the authenticationService.
+ * 
+ * @author marlene
+ * 
+ */
+
 public class AuthenticationServiceImpl implements AuthenticationService {
 
 	private UserDao userDao = new UserDaoJpa();

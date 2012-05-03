@@ -1,5 +1,12 @@
 package de.hszg.tinyblog.service;
 
+/**
+ * This interface provides the method for proving a users password.
+ * 
+ * @author marlene
+ * 
+ */
+
 public interface AuthenticationService {
 
 	/**

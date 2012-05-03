@@ -1,4 +1,4 @@
-package de.hszg.tinyblog.persistence;
+package de.hszg.tinyblog.util;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;

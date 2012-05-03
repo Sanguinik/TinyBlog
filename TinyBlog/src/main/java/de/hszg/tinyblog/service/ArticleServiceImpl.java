@@ -6,6 +6,13 @@ import de.hszg.tinyblog.persistence.ArticleDao;
 import de.hszg.tinyblog.persistence.ArticleDaoJpa;
 import de.hszg.tinyblog.persistence.model.Article;
 
+/**
+ * This is the implementation of the ArticleService.
+ * 
+ * @author marlene
+ * 
+ */
+
 public class ArticleServiceImpl implements ArticleService {
 
 	private ArticleDao articleDao = new ArticleDaoJpa();
