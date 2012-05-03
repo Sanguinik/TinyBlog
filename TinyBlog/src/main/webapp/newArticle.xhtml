@@ -29,17 +29,17 @@
 			<h:form>
 				<h:outputLabel value="Titel des Artikels: " />
 				<h:inputText id="title" required="true" size="60"
-					requiredMessage="Der Titel darf nicht leer sein." />
+					requiredMessage="Der Titel darf nicht leer sein." value="#{createArticleBean.title}" />
 				<br />
 				<h:message for="title" styleClass="errMessage"/>
 				<br />
-				<p:editor id="editor" width="720" required="true"
-					requiredMessage="Der Artikel darf nicht leer sein." />
+				<p:editor id="editor" width="720" required="true" 
+					requiredMessage="Der Artikel darf nicht leer sein." value="#{createArticleBean.content}" />
 				 
 				<h:message for="editor" styleClass="errMessage"/>
 				 
 				<br />
-				<h:commandButton value="Veröffentlichen" />
+				<h:commandButton value="Veröffentlichen" action="#{createArticleBean.addArticle}"/>
 			</h:form>
 
 

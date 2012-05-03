@@ -7,6 +7,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
+import de.hszg.tinyblog.persistence.model.User;
 import de.hszg.tinyblog.service.AuthenticationService;
 import de.hszg.tinyblog.service.AuthenticationServiceImpl;
 
@@ -15,14 +16,14 @@ import de.hszg.tinyblog.service.AuthenticationServiceImpl;
  * session and provides the methods for login and logout.
  */
 
-@ManagedBean
+@ManagedBean(name = "authenticationContextBean")
 @SessionScoped
 public class AuthenticationContextBean implements Serializable {
 
 	private static final long serialVersionUID = -3185273713868882607L;
 	private String email;
-
 	private String password;
+	private User user;
 
 	/**
 	 * Empty constructor is needed for JSF.
@@ -40,7 +41,8 @@ public class AuthenticationContextBean implements Serializable {
 	/**
 	 * This method gets the email and the password out of the view and proves
 	 * them on their correctness in relation to the data is persisted in the
-	 * database.
+	 * database. When its correct it sets the current user and a boolean wich
+	 * keeps the login state for the session.
 	 * 
 	 * @return index for going to the index-page oder null, to stay on the
 	 *         current page if the data was not correct.
@@ -52,6 +54,8 @@ public class AuthenticationContextBean implements Serializable {
 
 		if (authenticationService.checkPassword(email, password)) {
 			loggedIn = true;
+			user = authenticationService.findUserByEmail(email);
+			System.out.println(user);
 			return "index";
 		}
 
@@ -64,7 +68,7 @@ public class AuthenticationContextBean implements Serializable {
 	/**
 	 * 
 	 * This method sets the boolean that is responsible for keeping a user
-	 * logged in within a session to false.
+	 * logged in within a session to false and sets the user to null.
 	 * 
 	 * @return logout - for directing it to the logout-page.
 	 */
@@ -72,6 +76,7 @@ public class AuthenticationContextBean implements Serializable {
 	public String logout() {
 
 		loggedIn = false;
+		user = null;
 
 		return "logout";
 	}
@@ -90,5 +95,13 @@ public class AuthenticationContextBean implements Serializable {
 
 	public void setPassword(final String password) {
 		this.password = password;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(final User user) {
+		this.user = user;
 	}
 }

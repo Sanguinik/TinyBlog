@@ -1,5 +1,7 @@
 package de.hszg.tinyblog.service;
 
+import de.hszg.tinyblog.persistence.model.User;
+
 /**
  * This interface provides the method for proving a users password.
  * 
@@ -19,5 +21,14 @@ public interface AuthenticationService {
 	 * @return true if the password was correct.
 	 */
 	boolean checkPassword(String email, String password);
+
+	/**
+	 * This method is used for getting an user by its email address.
+	 * 
+	 * @param email
+	 *            The email of the user.
+	 * @return The user found by the email address.
+	 */
+	User findUserByEmail(String email);
 
 }

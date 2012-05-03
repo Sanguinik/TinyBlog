@@ -33,4 +33,14 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 		return false;
 	}
 
+	@Override
+	public User findUserByEmail(final String email) {
+
+		User user;
+
+		user = userDao.findUserByEmail(email);
+
+		return user;
+	}
+
 }
