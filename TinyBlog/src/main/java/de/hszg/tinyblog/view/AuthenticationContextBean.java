@@ -55,7 +55,6 @@ public class AuthenticationContextBean implements Serializable {
 		if (authenticationService.checkPassword(email, password)) {
 			loggedIn = true;
 			user = authenticationService.findUserByEmail(email);
-			System.out.println(user);
 			return "index";
 		}
 

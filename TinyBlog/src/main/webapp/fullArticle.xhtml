@@ -24,7 +24,7 @@
 		<ui:define name="content">
 
 			<h:form>
-				<h:outputText value="#{fullArticleBean.article.content}" />
+				<h:outputText value="#{fullArticleBean.article.content}" escape="false"/>
 				<br />
 				<hr />
 				<h:panelGrid columns="4" cellspacing="10">
@@ -34,13 +34,14 @@
 					</h:outputText>
 					<h:panelGroup
 								rendered="#{not authenticationContextBean.loggedIn}" />
-					<h:commandLink value="Artikel bearbeiten" action="editArticle"
+					<h:commandLink value="Artikel bearbeiten" action="#{editArticleBean.showEditArticle(fullArticleBean.article)}"
 								rendered="#{authenticationContextBean.loggedIn}" />
 					<h:outputText value="Kommentare(#{fullArticleBean.article.numberOfComments})"/>
 				</h:panelGrid>
 				<hr />
 				<h:outputText value="Noch kein Kommentar vorhanden." />
-				
+			</h:form>
+			<h:form>	
 				<hr />
 				<h:outputText value="Kommentar verfassen" />
 				<br />

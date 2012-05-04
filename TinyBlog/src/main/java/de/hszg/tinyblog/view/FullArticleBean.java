@@ -1,6 +1,7 @@
 package de.hszg.tinyblog.view;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 
 import de.hszg.tinyblog.persistence.model.Article;
 import de.hszg.tinyblog.service.ArticleService;
@@ -14,6 +15,7 @@ import de.hszg.tinyblog.service.ArticleServiceImpl;
  * 
  */
 
+@SessionScoped
 @ManagedBean
 public class FullArticleBean {
 

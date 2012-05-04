@@ -12,7 +12,7 @@
 							<h:commandLink value="#{article.title}" action="#{fullArticleBean.showFullArticle(article)}"/>
 						</h2>
 						<h:outputText
-							value="#{article.content}" />
+							value="#{article.content}" escape="false"/>
 						
 						<br />
 						<h:commandLink value="Alles lesen" action="#{fullArticleBean.showFullArticle(article)}" />
@@ -27,7 +27,7 @@
 								action="#{fullArticleBean.showFullArticle(article)}" />
 							<h:panelGroup
 								rendered="#{not authenticationContextBean.loggedIn}" />
-							<h:commandLink value="Artikel bearbeiten" action="editArticle"
+							<h:commandLink value="Artikel bearbeiten" action="#{editArticleBean.showEditArticle(article)}"
 								rendered="#{authenticationContextBean.loggedIn}" />
 						</h:panelGrid>
 
