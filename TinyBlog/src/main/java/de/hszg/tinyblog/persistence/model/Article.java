@@ -9,18 +9,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
 
 /**
  * 
  * This is the model class for an article.
  * 
  * @author marlene
- *
+ * 
  */
 @Entity
 public class Article {
@@ -29,6 +29,7 @@ public class Article {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	private String title;
+	@Lob
 	private String content;
 	@Temporal(TemporalType.DATE)
 	private Date publishingDate;
@@ -37,21 +38,23 @@ public class Article {
 	@ManyToOne
 	private User user;
 
+	public Article() {
 
-	public Article(){
-		
 	}
-	
+
 	/**
 	 * This constructor is used to create a new article.
 	 * 
-	 * @param title The title of the article.
-	 * @param content The text of the article.
-	 * @param user The user who wrote the article.
+	 * @param title
+	 *            The title of the article.
+	 * @param content
+	 *            The text of the article.
+	 * @param user
+	 *            The user who wrote the article.
 	 */
 
-	public Article(String title, String content, User user) {
-		
+	public Article(final String title, final String content, final User user) {
+
 		publishingDate = new Date();
 		comments = new HashSet<Comment>();
 		this.title = title;
@@ -61,17 +64,21 @@ public class Article {
 
 	/**
 	 * This method adds a comment to a Set of Comments.
-	 * @param comment The comment which should be added.
+	 * 
+	 * @param comment
+	 *            The comment which should be added.
 	 */
-	public void addComment(Comment comment) {
+	public void addComment(final Comment comment) {
 		comments.add(comment);
 	}
 
 	/**
 	 * This method removes a comment from a Set of Comments.
-	 * @param comment The comment which should be removed.
+	 * 
+	 * @param comment
+	 *            The comment which should be removed.
 	 */
-	public void removeComment(Comment comment) {
+	public void removeComment(final Comment comment) {
 		comments.remove(comment);
 	}
 
@@ -84,12 +91,12 @@ public class Article {
 		return Collections.unmodifiableSet(comments);
 
 	}
-	
+
 	/**
 	 * 
 	 * @return the number of entries in an unmodifiable Set of comments
 	 */
-	public int getNumberOfComments(){
+	public int getNumberOfComments() {
 		return Collections.unmodifiableSet(comments).size();
 	}
 
@@ -101,7 +108,7 @@ public class Article {
 		return title;
 	}
 
-	public void setTitle(String title) {
+	public void setTitle(final String title) {
 		this.title = title;
 	}
 
@@ -109,14 +116,14 @@ public class Article {
 		return content;
 	}
 
-	public void setContent(String content) {
+	public void setContent(final String content) {
 		this.content = content;
 	}
 
 	public User getUser() {
 		return user;
 	}
-	
+
 	public long getId() {
 		return id;
 	}

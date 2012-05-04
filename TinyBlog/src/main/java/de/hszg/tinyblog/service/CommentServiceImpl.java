@@ -5,6 +5,13 @@ import de.hszg.tinyblog.persistence.CommentDaoJpa;
 import de.hszg.tinyblog.persistence.model.Article;
 import de.hszg.tinyblog.persistence.model.Comment;
 
+/**
+ * This is the implementation of the CommentService.
+ * 
+ * @author marlene
+ * 
+ */
+
 public class CommentServiceImpl implements CommentService {
 
 	private CommentDao commentDao = new CommentDaoJpa();
