@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.util.Set;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
@@ -100,5 +102,12 @@ public class CommentServiceTest {
 		assertFalse(commentService.removeComment(commentByUnknown, null));
 
 		assertFalse(commentService.removeComment(null, null));
+	}
+
+	@Test
+	public void testFindAllComments() {
+
+		Set<Comment> comments = commentService.findAllComments(article);
+
 	}
 }

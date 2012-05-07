@@ -61,6 +61,19 @@ div#articlePrev a,h2{
 	text-decoration: none;
 }
 
+div#comment{
+	border: solid black thin;
+	background-color: background;
+	padding: 10px;
+	margin: 10px;
+	
+}
+
+div#comment a{
+	color:green;
+	text-decoration: none;
+}
+
 div#page {
 	text-align: left;
 	margin: 0 auto;

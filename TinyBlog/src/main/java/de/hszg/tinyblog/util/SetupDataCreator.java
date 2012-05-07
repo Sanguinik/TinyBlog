@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.hszg.tinyblog.persistence.model.Article;
+import de.hszg.tinyblog.persistence.model.Comment;
 import de.hszg.tinyblog.persistence.model.User;
 
 /**
@@ -40,11 +41,20 @@ public class SetupDataCreator implements ServletContextListener {
 				"My first article",
 				"This is an example for an article. Have fun with your new blog.",
 				user);
+		Comment comment = new Comment(user, "An example comment.");
 
 		EntityManager entityManager = emf.createEntityManager();
 		entityManager.getTransaction().begin();
 		entityManager.persist(user);
 		entityManager.persist(article);
+		entityManager.persist(comment);
+		entityManager.getTransaction().commit();
+		entityManager.close();
+
+		article.addComment(comment);
+		entityManager = emf.createEntityManager();
+		entityManager.getTransaction().begin();
+		entityManager.merge(article);
 		entityManager.getTransaction().commit();
 		entityManager.close();
 

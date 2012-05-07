@@ -39,7 +39,13 @@
 					<h:outputText value="Kommentare(#{fullArticleBean.article.numberOfComments})"/>
 				</h:panelGrid>
 				<hr />
-				<h:outputText value="Noch kein Kommentar vorhanden." />
+				
+				<ui:repeat var="comment" value="#{commentBean.comments}">
+				<div id="comment">
+					<ui:include src="/comment.xhtml"/>
+				</div>
+				</ui:repeat>
+				
 			</h:form>
 			<h:form>	
 				<hr />
@@ -47,11 +53,14 @@
 				<br />
 				<h:panelGrid columns="3">
 					<h:outputText value="Name: " />
-					<h:inputText id="name" required="true" requiredMessage="Bitte Namen angeben."  />
+					<h:inputText rendered="#{not authenticationContextBean.loggedIn}" id="name" required="true" requiredMessage="Bitte Namen angeben."  />
+					<h:outputText rendered="#{authenticationContextBean.loggedIn}" value="#{authenticationContextBean.user.name}" />
 					<h:message for="name" styleClass="errMessage"/>
+					
 					<h:outputText value="E-Mail: " />
 					<h:inputText id="email" required="true"
-						requiredMessage="Bitte E-Mail-Adresse angeben." />
+						requiredMessage="Bitte E-Mail-Adresse angeben." rendered="#{not authenticationContextBean.loggedIn}"/>
+					<h:outputText rendered="#{authenticationContextBean.loggedIn}" value="#{authenticationContextBean.user.email}"/>
 					<h:message for="email" styleClass="errMessage"/>
 				</h:panelGrid>
 				<h:inputTextarea id="text" rows="5" cols="50" required="true" requiredMessage="Bitte einen Kommentar angeben"/>

@@ -1,5 +1,7 @@
 package de.hszg.tinyblog.service;
 
+import java.util.Set;
+
 import de.hszg.tinyblog.persistence.CommentDao;
 import de.hszg.tinyblog.persistence.CommentDaoJpa;
 import de.hszg.tinyblog.persistence.model.Article;
@@ -34,6 +36,12 @@ public class CommentServiceImpl implements CommentService {
 		}
 
 		return false;
+	}
+
+	@Override
+	public Set<Comment> findAllComments(final Article article) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

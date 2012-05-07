@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:outputStylesheet library="css" name="style.css" />
+
+<h:form>
+
+
+	<h:panelGrid columns="3" cellspacing="10px">
+		<h:outputText value="#{comment.name}" />
+		<h:outputText value="#{comment.publishingDate}" />
+		<h:panelGroup rendered="#{not authenticationContextBean.loggedIn}" />
+		<h:commandLink value="Löschen"
+			rendered="#{authenticationContextBean.loggedIn}" />
+	</h:panelGrid>
+
+	<hr />
+
+	<h:outputText
+		value="#{comment.content}" />
+
+</h:form>
+
+</html>
