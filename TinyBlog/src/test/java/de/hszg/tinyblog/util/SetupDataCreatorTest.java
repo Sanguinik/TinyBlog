@@ -1,4 +1,4 @@
-package de.hszg.tinyblog.persistence;
+package de.hszg.tinyblog.util;
 
 import static org.junit.Assert.assertEquals;
 
@@ -12,7 +12,7 @@ import de.hszg.tinyblog.persistence.model.User;
 import de.hszg.tinyblog.util.EmfFactory;
 import de.hszg.tinyblog.util.SetupDataCreator;
 
-public class UserCreatorTest {
+public class SetupDataCreatorTest {
 
 	@Test
 	public void test() {

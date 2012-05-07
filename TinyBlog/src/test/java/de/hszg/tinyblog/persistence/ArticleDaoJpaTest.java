@@ -1,7 +1,9 @@
 package de.hszg.tinyblog.persistence;
 
-import static org.junit.Assert.*;
-
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -22,6 +24,7 @@ public class ArticleDaoJpaTest {
 	private static final String MY_OTHER_TITLE = "My other title";
 	private static final String MY_OTHER_CONTENT = "My other content";
 	private static final long RANDOM_ID = 42;
+	private String MY_LONG_CONTENT = longStringGenerator();
 	private long id;
 	private ArticleDao articleDao;
 	private User user = new User("Marlene", "secret", "marlene@example.org");
@@ -36,10 +39,10 @@ public class ArticleDaoJpaTest {
 		entityManager.persist(user);
 		entityManager.getTransaction().commit();
 		entityManager.close();
-		}
-	
+	}
+
 	@After
-	public void tearDown(){
+	public void tearDown() {
 		emf.close();
 		EmfFactory.reset();
 	}
@@ -71,156 +74,173 @@ public class ArticleDaoJpaTest {
 
 	@Test
 	public void testAddArticleJpa() {
-		
-		
+
 		Article article = new Article(MY_TITLE, MY_CONTENT, user);
 
-		
 		assertTrue(articleDao.addArticle(article));
 		id = article.getId();
-		
+
 		EntityManager entityManager = emf.createEntityManager();
 		Article foundArticle = entityManager.find(Article.class, id);
 		entityManager.close();
 		assertEquals(MY_TITLE, foundArticle.getTitle());
 		assertEquals(MY_CONTENT, foundArticle.getContent());
-		
+
 	}
-	
-	
+
 	@Test
-	public void testAddMultipleArticles(){
-		
+	public void testAddMultipleArticles() {
+
 		Article article = new Article(MY_TITLE, MY_CONTENT, user);
-		
+
 		assertTrue(articleDao.addArticle(article));
 		assertEquals(1, articleDao.findAllArticles().size());
-				
+
 		Article article2 = new Article(MY_OTHER_TITLE, MY_OTHER_CONTENT, user);
 		assertTrue(articleDao.addArticle(article2));
 		assertEquals(2, articleDao.findAllArticles().size());
 	}
 
-	
 	@Test
-	public void testAddSameArticleFail(){
+	public void testAddSameArticleFail() {
 		Article article = new Article(MY_TITLE, MY_CONTENT, user);
-		
+
 		assertTrue(articleDao.addArticle(article));
-		
+
 		assertEquals(1, articleDao.findAllArticles().size());
-				
+
 		assertFalse(articleDao.addArticle(article));
-		
-		assertEquals(1, articleDao.findAllArticles().size());	
-			
+
+		assertEquals(1, articleDao.findAllArticles().size());
+
 	}
-	
+
 	@Test
-	public void testAddArticleFailNullParameters(){
+	public void testAddArticleFailNullParameters() {
 		Article article = new Article(null, MY_CONTENT, user);
 		assertFalse(articleDao.addArticle(article));
-		
+
 		article = new Article(MY_CONTENT, null, user);
 		assertFalse(articleDao.addArticle(article));
-		
+
 		article = new Article(MY_CONTENT, MY_CONTENT, null);
 		assertFalse(articleDao.addArticle(article));
 	}
-	
+
 	@Test
-	public void testAddArticleFailArticleMustNotBeNull(){
+	public void testAddArticleFailArticleMustNotBeNull() {
 		assertFalse(articleDao.addArticle(null));
 	}
-	
+
+	/**
+	 * Bug: Articles with too long content could not be added to the database.
+	 */
 	@Test
-	public void testRemoveArticle(){
-		Article article = new Article(MY_TITLE, MY_CONTENT, user);
-		
+	public void testAddArticleBugContentTooLong() {
+		Article article = new Article(MY_TITLE, MY_LONG_CONTENT, user);
 		assertTrue(articleDao.addArticle(article));
-		
-		assertEquals(1, articleDao.findAllArticles().size());
-		
-		assertTrue(articleDao.removeArticle(article));
-		
-		assertEquals(0,articleDao.findAllArticles().size());
+
+		id = article.getId();
+
+		EntityManager entityManager = emf.createEntityManager();
+		Article foundArticle = entityManager.find(Article.class, id);
+		entityManager.close();
+		assertEquals(MY_TITLE, foundArticle.getTitle());
+		assertEquals(MY_LONG_CONTENT, foundArticle.getContent());
 	}
-	
+
 	@Test
-	public void testRemoveArticleFailArticleMustNotBeNull(){
+	public void testRemoveArticle() {
+		Article article = new Article(MY_TITLE, MY_CONTENT, user);
+
+		assertTrue(articleDao.addArticle(article));
+
+		assertEquals(1, articleDao.findAllArticles().size());
+
+		assertTrue(articleDao.removeArticle(article));
+
+		assertEquals(0, articleDao.findAllArticles().size());
+	}
+
+	@Test
+	public void testRemoveArticleFailArticleMustNotBeNull() {
 		assertFalse(articleDao.removeArticle(null));
 	}
 
 	@Test
-	public void testEditArticle(){
+	public void testEditArticle() {
 		Article article = new Article(MY_TITLE, MY_CONTENT, user);
-		
+
 		assertTrue(articleDao.addArticle(article));
-		
+
 		id = article.getId();
-		
+
 		article.setTitle(MY_OTHER_TITLE);
 		article.setContent(MY_OTHER_CONTENT);
-		
+
 		assertTrue(articleDao.editArticle(article));
-		
+
 		EntityManager entityManager = emf.createEntityManager();
 		Article foundArticle = entityManager.find(Article.class, id);
 		entityManager.close();
 		assertEquals(MY_OTHER_TITLE, foundArticle.getTitle());
 		assertEquals(MY_OTHER_CONTENT, foundArticle.getContent());
 	}
-	
+
 	@Test
-	public void testEditArticleFailArticleMustNotBeNull(){
-		
+	public void testEditArticleFailArticleMustNotBeNull() {
+
 		assertFalse(articleDao.editArticle(null));
 	}
-	
+
 	@Test
-	public void testEditArticleFailNullParameters(){
+	public void testEditArticleFailNullParameters() {
 		Article article = new Article(MY_TITLE, MY_CONTENT, user);
 		assertTrue(articleDao.addArticle(article));
-		
+
 		article.setTitle(null);
 		assertFalse(articleDao.editArticle(article));
-		
+
 		article.setContent(null);
 		assertFalse(articleDao.editArticle(article));
-		
+
 	}
-	
+
 	@Test
-	public void testFindArticleById(){
-		
+	public void testFindArticleById() {
+
 		Article article = new Article(MY_TITLE, MY_CONTENT, user);
-		
+
 		assertTrue(articleDao.addArticle(article));
 		id = article.getId();
-		
+
 		Article foundArticle = articleDao.findArticleById(id);
-		
+
 		assertEquals(MY_TITLE, foundArticle.getTitle());
 		assertEquals(MY_CONTENT, foundArticle.getContent());
 	}
-	
+
 	@Test
-	public void testFindArticleByIdFailNoArticlePersisted(){
-		
+	public void testFindArticleByIdFailNoArticlePersisted() {
+
 		Article foundArticle = articleDao.findArticleById(RANDOM_ID);
 		assertNull(foundArticle);
 	}
-	
+
 	@Test
-	public void testFindArticleByIdFailIdNotAvailable(){
+	public void testFindArticleByIdFailIdNotAvailable() {
 		Article article = new Article(MY_TITLE, MY_CONTENT, user);
 		long articleId = article.getId();
 		long newId = articleId + 1;
 		assertNull(articleDao.findArticleById(newId));
 	}
-	
-	
-	
-	
-	
+
+	private String longStringGenerator() {
+		String temp = " ";
+		for (int i = 0; i < 1000; i++) {
+			temp = temp + i;
+		}
+		return temp;
+	}
+
 }
