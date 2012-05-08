@@ -25,7 +25,6 @@ public class FullArticleBean {
 	 * Empty constructor is needed for JSF
 	 */
 	public FullArticleBean() {
-
 	}
 
 	/**

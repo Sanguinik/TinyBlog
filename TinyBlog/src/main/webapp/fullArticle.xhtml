@@ -39,14 +39,18 @@
 					<h:outputText value="Kommentare(#{fullArticleBean.article.numberOfComments})"/>
 				</h:panelGrid>
 				<hr />
-				
-				<ui:repeat var="comment" value="#{commentBean.comments}">
+			</h:form>
+			
+			<h:form>
+				<ui:repeat var="comment" value="#{commentBean.showAllComments(fullArticleBean.article)}">
 				<div id="comment">
 					<ui:include src="/comment.xhtml"/>
 				</div>
 				</ui:repeat>
 				
+				
 			</h:form>
+				
 			<h:form>	
 				<hr />
 				<h:outputText value="Kommentar verfassen" />

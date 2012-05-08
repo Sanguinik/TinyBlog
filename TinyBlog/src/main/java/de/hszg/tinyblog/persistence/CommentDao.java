@@ -1,5 +1,7 @@
 package de.hszg.tinyblog.persistence;
 
+import java.util.Set;
+
 import de.hszg.tinyblog.persistence.model.Article;
 import de.hszg.tinyblog.persistence.model.Comment;
 
@@ -42,5 +44,14 @@ public interface CommentDao {
 	 * @return The comment with the given id.
 	 */
 	Comment findCommentById(long id);
+
+	/**
+	 * This method returns all comments of an article.
+	 * 
+	 * @param article
+	 *            The article where the comments should be loaded from.
+	 * @return All comments of the given article.
+	 */
+	Set<Comment> findAllComments(Article article);
 
 }

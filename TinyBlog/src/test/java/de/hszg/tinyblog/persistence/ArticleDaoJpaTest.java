@@ -16,6 +16,7 @@ import org.junit.Test;
 import de.hszg.tinyblog.persistence.model.Article;
 import de.hszg.tinyblog.persistence.model.User;
 import de.hszg.tinyblog.util.EmfFactory;
+import de.hszg.tinyblog.util.StringCreatorTestHelper;
 
 public class ArticleDaoJpaTest {
 
@@ -24,7 +25,8 @@ public class ArticleDaoJpaTest {
 	private static final String MY_OTHER_TITLE = "My other title";
 	private static final String MY_OTHER_CONTENT = "My other content";
 	private static final long RANDOM_ID = 42;
-	private String MY_LONG_CONTENT = longStringGenerator();
+	private StringCreatorTestHelper scth = new StringCreatorTestHelper();
+	private String MY_LONG_CONTENT = scth.longStringGenerator();
 	private long id;
 	private ArticleDao articleDao;
 	private User user = new User("Marlene", "secret", "marlene@example.org");
@@ -233,14 +235,6 @@ public class ArticleDaoJpaTest {
 		long articleId = article.getId();
 		long newId = articleId + 1;
 		assertNull(articleDao.findArticleById(newId));
-	}
-
-	private String longStringGenerator() {
-		String temp = " ";
-		for (int i = 0; i < 1000; i++) {
-			temp = temp + i;
-		}
-		return temp;
 	}
 
 }

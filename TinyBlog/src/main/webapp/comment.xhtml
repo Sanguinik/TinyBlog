@@ -1,18 +1,19 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
 
 <h:outputStylesheet library="css" name="style.css" />
 
 <h:form>
 
 
-	<h:panelGrid columns="3" cellspacing="10px">
+	<h:panelGrid columns="3" cellspacing="10">
 		<h:outputText value="#{comment.name}" />
-		<h:outputText value="#{comment.publishingDate}" />
+		<h:outputText value="#{comment.publishingDate}">
+			<f:convertDateTime type="date" pattern="dd.MM.yyyy, HH:mm:ss" timeZone="Europe/Berlin" />
+		</h:outputText>
 		<h:panelGroup rendered="#{not authenticationContextBean.loggedIn}" />
 		<h:commandLink value="Löschen"
 			rendered="#{authenticationContextBean.loggedIn}" />
@@ -25,4 +26,5 @@
 
 </h:form>
 
-</html>
+
+</ui:composition>

@@ -40,8 +40,10 @@ public class CommentServiceImpl implements CommentService {
 
 	@Override
 	public Set<Comment> findAllComments(final Article article) {
-		// TODO Auto-generated method stub
-		return null;
+
+		Set<Comment> comments = commentDao.findAllComments(article);
+
+		return comments;
 	}
 
 }

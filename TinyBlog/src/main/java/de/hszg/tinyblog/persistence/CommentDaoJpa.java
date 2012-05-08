@@ -2,6 +2,8 @@ package de.hszg.tinyblog.persistence;
 
 import static de.hszg.tinyblog.util.Validator.checkNotNull;
 
+import java.util.Set;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
@@ -71,6 +73,17 @@ public class CommentDaoJpa implements CommentDao {
 		Comment comment = entityManager.find(Comment.class, id);
 
 		return comment;
+	}
+
+	@Override
+	public Set<Comment> findAllComments(final Article article) {
+
+		long foundId = article.getId();
+		Article foundArticle = articleDao.findArticleById(foundId);
+
+		Set<Comment> comments = foundArticle.getComments();
+
+		return comments;
 	}
 
 	private boolean nullCheck(final Comment comment, final Article article) {

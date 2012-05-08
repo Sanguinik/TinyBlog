@@ -5,6 +5,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import java.util.Set;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
@@ -16,6 +18,7 @@ import de.hszg.tinyblog.persistence.model.Article;
 import de.hszg.tinyblog.persistence.model.Comment;
 import de.hszg.tinyblog.persistence.model.User;
 import de.hszg.tinyblog.util.EmfFactory;
+import de.hszg.tinyblog.util.StringCreatorTestHelper;
 
 public class CommentDaoJpaTest {
 
@@ -30,7 +33,8 @@ public class CommentDaoJpaTest {
 	private User user = new User("Marlene", "secret", "Marlene@example.org");
 	private Article article = new Article(TITLE, ARTICLE_CONTENT, user);
 	private EntityManagerFactory emf;
-	private String LONG_CONTENT = longStringGenerator();
+	private StringCreatorTestHelper scth = new StringCreatorTestHelper();
+	private String LONG_CONTENT = scth.longStringGenerator();
 
 	@Before
 	public void setUp() {
@@ -251,12 +255,18 @@ public class CommentDaoJpaTest {
 		assertNull(commentDao.findCommentById(newId));
 	}
 
-	private String longStringGenerator() {
-		String temp = " ";
-		for (int i = 0; i < 1000; i++) {
-			temp = temp + i;
-		}
-		return temp;
+	@Test
+	public void testFindAllComments() {
+		Set<Comment> comments = commentDao.findAllComments(article);
+		assertEquals(0, comments.size());
+
+		Comment comment = new Comment(NAME, EMAIL, CONTENT);
+
+		comments = commentDao.findAllComments(article);
+		assertTrue(commentDao.addComment(comment, article));
+
+		assertEquals(1, comments.size());
+
 	}
 
 }

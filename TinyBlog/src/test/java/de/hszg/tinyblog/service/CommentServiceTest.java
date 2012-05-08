@@ -109,5 +109,13 @@ public class CommentServiceTest {
 
 		Set<Comment> comments = commentService.findAllComments(article);
 
+		assertEquals(0, comments.size());
+
+		assertTrue(commentService.addComment(commentByUser, article));
+
+		comments = commentService.findAllComments(article);
+
+		assertEquals(1, comments.size());
+
 	}
 }
