@@ -4,10 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import de.hszg.tinyblog.persistence.model.Article;
 import de.hszg.tinyblog.persistence.model.Comment;
+import de.hszg.tinyblog.persistence.model.User;
 import de.hszg.tinyblog.service.CommentService;
 import de.hszg.tinyblog.service.CommentServiceImpl;
 
@@ -19,18 +27,26 @@ import de.hszg.tinyblog.service.CommentServiceImpl;
  * 
  */
 
+@SessionScoped
 @ManagedBean
 public class CommentBean {
 
+	private static Logger logger = LoggerFactory.getLogger(CommentBean.class);
+
 	private String name;
+	private String email;
 	private String content;
 	private Set<Comment> comments;
+	private CommentService commentService = new CommentServiceImpl();
+	@ManagedProperty("#{authenticationContextBean.user}")
+	private User user;
+	@ManagedProperty("#{fullArticleBean}")
+	private FullArticleBean fullArticleBean;
 
 	/**
-	 * Empty constructor for JSF.
+	 * Empty Constructor for JSF.
 	 */
 	public CommentBean() {
-
 	}
 
 	/**
@@ -42,10 +58,55 @@ public class CommentBean {
 	 * @return A list with the comments of the article.
 	 */
 	public List<Comment> showAllComments(final Article article) {
-		CommentService commentService = new CommentServiceImpl();
 		comments = commentService.findAllComments(article);
-		List<Comment> commentList = new ArrayList<Comment>(comments);
-		return commentList;
+		return new ArrayList<Comment>(comments);
+	}
+
+	/**
+	 * This method creates communicates with the commentService to create a new
+	 * comment to an given article.
+	 * 
+	 * @param article
+	 *            The article where the comment should be added.
+	 */
+	public void addComment(final Article article) {
+
+		Comment comment;
+
+		if (user == null) {
+			comment = new Comment(name, email, content);
+		} else {
+			comment = new Comment(user, content);
+		}
+
+		commentService.addComment(comment, article);
+	}
+
+	/**
+	 * This method removes a comment from an article by communication with the
+	 * commentService.
+	 * 
+	 * @param article
+	 *            The article where the comment should be removed.
+	 * @param comment
+	 *            The comment which should be removed.
+	 */
+	public String removeComment(final Article article, final Comment comment) {
+
+		FacesContext context = FacesContext.getCurrentInstance();
+
+		logger.info("remove comment with article " + article + "and comment "
+				+ comment);
+
+		if (!commentService.removeComment(comment, article)) {
+			context.addMessage(null,
+					new FacesMessage("Das hat nicht geklappt."));
+			logger.warn("remove comment fail");
+		}
+		fullArticleBean.showFullArticle(article);
+
+		return null;
+
 	}
 
 	public String getName() {
@@ -72,4 +133,27 @@ public class CommentBean {
 		this.comments = comments;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(final String email) {
+		this.email = email;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(final User user) {
+		this.user = user;
+	}
+
+	public FullArticleBean getFullArticleBean() {
+		return fullArticleBean;
+	}
+
+	public void setFullArticleBean(final FullArticleBean fullArticleBean) {
+		this.fullArticleBean = fullArticleBean;
+	}
 }

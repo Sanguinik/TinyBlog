@@ -24,55 +24,66 @@
 		<ui:define name="content">
 
 			<h:form>
-				<h:outputText value="#{fullArticleBean.article.content}" escape="false"/>
+				<h:outputText value="#{fullArticleBean.article.content}"
+					escape="false" />
 				<br />
 				<hr />
 				<h:panelGrid columns="4" cellspacing="10">
 					<h:outputText value="Autor: #{fullArticleBean.article.user.name}" />
 					<h:outputText value="#{fullArticleBean.article.publishingDate}">
-						<f:convertDateTime type="date" pattern="dd.MM.yyyy, HH:mm:ss" timeZone="Europe/Berlin" />
+						<f:convertDateTime type="date" pattern="dd.MM.yyyy, HH:mm:ss"
+							timeZone="Europe/Berlin" />
 					</h:outputText>
-					<h:panelGroup
-								rendered="#{not authenticationContextBean.loggedIn}" />
-					<h:commandLink value="Artikel bearbeiten" action="#{editArticleBean.showEditArticle(fullArticleBean.article)}"
-								rendered="#{authenticationContextBean.loggedIn}" />
-					<h:outputText value="Kommentare(#{fullArticleBean.article.numberOfComments})"/>
+					<h:panelGroup rendered="#{not authenticationContextBean.loggedIn}" />
+					<h:commandLink value="Artikel bearbeiten"
+						action="#{editArticleBean.showEditArticle(fullArticleBean.article)}"
+						rendered="#{authenticationContextBean.loggedIn}" />
+					<h:outputText
+						value="Kommentare(#{fullArticleBean.article.numberOfComments})" />
 				</h:panelGrid>
 				<hr />
 			</h:form>
+
 			
-			<h:form>
-				<ui:repeat var="comment" value="#{commentBean.showAllComments(fullArticleBean.article)}">
-				<div id="comment">
-					<ui:include src="/comment.xhtml"/>
-				</div>
+				<ui:repeat var="comment" 
+					value="#{commentBean.showAllComments(fullArticleBean.article)}">
+					<div id="comment">
+						<ui:include src="/comment.xhtml" />
+					</div>
 				</ui:repeat>
-				
-				
-			</h:form>
-				
-			<h:form>	
+
+
+
+			<h:form>
 				<hr />
 				<h:outputText value="Kommentar verfassen" />
 				<br />
 				<h:panelGrid columns="3">
 					<h:outputText value="Name: " />
-					<h:inputText rendered="#{not authenticationContextBean.loggedIn}" id="name" required="true" requiredMessage="Bitte Namen angeben."  />
-					<h:outputText rendered="#{authenticationContextBean.loggedIn}" value="#{authenticationContextBean.user.name}" />
-					<h:message for="name" styleClass="errMessage"/>
-					
+					<h:inputText rendered="#{not authenticationContextBean.loggedIn}"
+						id="name" required="true" requiredMessage="Bitte Namen angeben." 
+						value="#{commentBean.name}"/>
+					<h:inputText rendered="#{authenticationContextBean.loggedIn}"
+						value="#{commentBean.user.name}" disabled="true"/>
+					<h:message for="name" styleClass="errMessage" />
+
 					<h:outputText value="E-Mail: " />
 					<h:inputText id="email" required="true"
-						requiredMessage="Bitte E-Mail-Adresse angeben." rendered="#{not authenticationContextBean.loggedIn}"/>
-					<h:outputText rendered="#{authenticationContextBean.loggedIn}" value="#{authenticationContextBean.user.email}"/>
-					<h:message for="email" styleClass="errMessage"/>
+						requiredMessage="Bitte E-Mail-Adresse angeben."
+						rendered="#{not authenticationContextBean.loggedIn}"
+						value="#{commentBean.email}" />
+					<h:inputText rendered="#{authenticationContextBean.loggedIn}"
+						value="#{commentBean.user.email}" disabled="true"/>
+					<h:message for="email" styleClass="errMessage" />
 				</h:panelGrid>
-				<h:inputTextarea id="text" rows="5" cols="50" required="true" requiredMessage="Bitte einen Kommentar angeben"/>
-				<br/>
-				<h:message for="text" styleClass="errMessage"/>
-				<br/>
-				<h:commandButton value="Abschicken"/>
-				
+				<h:inputTextarea id="content" rows="5" cols="50" required="true"
+					requiredMessage="Bitte einen Kommentar angeben" value="#{commentBean.content}" />
+				<br />
+				<h:message for="content" styleClass="errMessage" />
+				<br />
+				<h:commandButton value="Abschicken"
+					action="#{commentBean.addComment(fullArticleBean.article)}" />
+
 
 			</h:form>
 

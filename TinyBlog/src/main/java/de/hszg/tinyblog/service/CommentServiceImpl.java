@@ -41,9 +41,7 @@ public class CommentServiceImpl implements CommentService {
 	@Override
 	public Set<Comment> findAllComments(final Article article) {
 
-		Set<Comment> comments = commentDao.findAllComments(article);
-
-		return comments;
+		return commentDao.findAllComments(article);
 	}
 
 }

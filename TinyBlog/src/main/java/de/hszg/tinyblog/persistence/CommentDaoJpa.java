@@ -58,8 +58,15 @@ public class CommentDaoJpa implements CommentDao {
 
 		if (nullCheck(comment, article)) {
 
-			article.removeComment(comment);
-			articleDao.editArticle(article);
+			EntityManager entityManager = emf.createEntityManager();
+			entityManager.getTransaction().begin();
+			Article attachedArticle = entityManager.find(Article.class,
+					article.getId());
+			Comment attachedComment = entityManager.find(Comment.class,
+					comment.getId());
+			attachedArticle.removeComment(attachedComment);
+			entityManager.getTransaction().commit();
+			entityManager.close();
 
 			return true;
 		}

@@ -4,27 +4,31 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html">
 
-<h:outputStylesheet library="css" name="style.css" />
+	<h:outputStylesheet library="css" name="style.css" />
 
-<h:form>
+	<h:form>
+	 
 
 
-	<h:panelGrid columns="3" cellspacing="10">
-		<h:outputText value="#{comment.name}" />
-		<h:outputText value="#{comment.publishingDate}">
-			<f:convertDateTime type="date" pattern="dd.MM.yyyy, HH:mm:ss" timeZone="Europe/Berlin" />
-		</h:outputText>
-		<h:panelGroup rendered="#{not authenticationContextBean.loggedIn}" />
-		<h:commandLink value="Löschen"
+		<h:panelGrid columns="3" cellspacing="10">
+			<h:outputText value="#{comment.user.name}" rendered="#{comment.user != null}" />
+			<h:outputText value="#{comment.name}" rendered="#{comment.user == null}"/>
+			<h:outputText value="#{comment.publishingDate}">
+				<f:convertDateTime type="date" pattern="dd.MM.yyyy, HH:mm:ss"
+					timeZone="Europe/Berlin" />
+			</h:outputText>
+		<h:commandButton value="Kommentar Löschen"
+			action="#{commentBean.removeComment(fullArticleBean.article, comment)}"
 			rendered="#{authenticationContextBean.loggedIn}" />
-	</h:panelGrid>
+			<h:panelGroup rendered="#{not authenticationContextBean.loggedIn}" />
+		</h:panelGrid>
 
-	<hr />
+		<hr />
 
-	<h:outputText
-		value="#{comment.content}" />
+		<h:outputText value="#{comment.content}" />
+		<h:messages></h:messages>
 
-</h:form>
+	</h:form>
 
 
 </ui:composition>

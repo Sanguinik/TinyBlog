@@ -204,8 +204,17 @@ public class CommentDaoJpaTest {
 		assertEquals(0, article.getNumberOfComments());
 		assertTrue(commentDao.addComment(comment, article));
 
+		// refresh article
+		entityManager = emf.createEntityManager();
+		article = entityManager.find(Article.class, article.getId());
+		entityManager.close();
+
 		assertEquals(1, article.getNumberOfComments());
 		assertTrue(commentDao.removeComment(comment, article));
+		// refresh article
+		entityManager = emf.createEntityManager();
+		article = entityManager.find(Article.class, article.getId());
+		entityManager.close();
 		assertEquals(0, article.getNumberOfComments());
 	}
 

@@ -39,7 +39,9 @@ public class FullArticleBean {
 		long articleId = article.getId();
 		ArticleService articleService = new ArticleServiceImpl();
 		this.article = articleService.findArticleById(articleId);
+
 		return "fullArticle";
+
 	}
 
 	public Article getArticle() {

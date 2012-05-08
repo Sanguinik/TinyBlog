@@ -26,6 +26,7 @@ public class CommentServiceTest {
 	private Comment commentByUser = new Comment(user, "This is my comment");
 	private Comment commentByUnknown = new Comment("Mr. Example",
 			"email@example.org", "Here is my comment.");
+	private long articleId;
 
 	private EntityManagerFactory emf;
 
@@ -38,6 +39,7 @@ public class CommentServiceTest {
 		entityManager.persist(article);
 		entityManager.getTransaction().commit();
 		entityManager.close();
+		articleId = article.getId();
 		commentService = new CommentServiceImpl();
 	}
 
@@ -83,13 +85,25 @@ public class CommentServiceTest {
 	@Test
 	public void testRemoveCommentFromArticle() {
 
+		EntityManager entityManager = emf.createEntityManager();
+		article = entityManager.find(Article.class, articleId);
+		entityManager.close();
+
 		assertEquals(0, article.getNumberOfComments());
 
 		assertTrue(commentService.addComment(commentByUnknown, article));
 
+		entityManager = emf.createEntityManager();
+		article = entityManager.find(Article.class, articleId);
+		entityManager.close();
+
 		assertEquals(1, article.getNumberOfComments());
 
 		assertTrue(commentService.removeComment(commentByUnknown, article));
+
+		entityManager = emf.createEntityManager();
+		article = entityManager.find(Article.class, articleId);
+		entityManager.close();
 
 		assertEquals(0, article.getNumberOfComments());
 	}
