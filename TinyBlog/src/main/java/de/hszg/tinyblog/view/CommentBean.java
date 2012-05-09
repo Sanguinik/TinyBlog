@@ -7,7 +7,6 @@ import java.util.Set;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import org.slf4j.Logger;
@@ -27,7 +26,6 @@ import de.hszg.tinyblog.service.CommentServiceImpl;
  * 
  */
 
-@SessionScoped
 @ManagedBean
 public class CommentBean {
 
@@ -42,11 +40,14 @@ public class CommentBean {
 	private User user;
 	@ManagedProperty("#{fullArticleBean}")
 	private FullArticleBean fullArticleBean;
+	@ManagedProperty("#{authenticationContextBean}")
+	private AuthenticationContextBean authenticationContextBean;
 
 	/**
 	 * Empty Constructor for JSF.
 	 */
 	public CommentBean() {
+		logger.info("Constructor");
 	}
 
 	/**
@@ -73,7 +74,7 @@ public class CommentBean {
 
 		Comment comment;
 
-		if (user == null) {
+		if (!authenticationContextBean.isLoggedIn()) {
 			comment = new Comment(name, email, content);
 		} else {
 			comment = new Comment(user, content);
@@ -155,5 +156,14 @@ public class CommentBean {
 
 	public void setFullArticleBean(final FullArticleBean fullArticleBean) {
 		this.fullArticleBean = fullArticleBean;
+	}
+
+	public AuthenticationContextBean getAuthenticationContextBean() {
+		return authenticationContextBean;
+	}
+
+	public void setAuthenticationContextBean(
+			final AuthenticationContextBean authenticationContextBean) {
+		this.authenticationContextBean = authenticationContextBean;
 	}
 }
