@@ -8,9 +8,9 @@ import javax.persistence.TypedQuery;
 
 import org.junit.Test;
 
+import de.hszg.tinyblog.persistence.model.Article;
+import de.hszg.tinyblog.persistence.model.Comment;
 import de.hszg.tinyblog.persistence.model.User;
-import de.hszg.tinyblog.util.EmfFactory;
-import de.hszg.tinyblog.util.SetupDataCreator;
 
 public class SetupDataCreatorTest {
 
@@ -22,13 +22,23 @@ public class SetupDataCreatorTest {
 
 		TypedQuery<User> q = entityManager.createQuery("select u from User u",
 				User.class);
+		TypedQuery<Article> qa = entityManager.createQuery(
+				"select a from Article a", Article.class);
+		TypedQuery<Comment> qc = entityManager.createQuery(
+				"select c from Comment c", Comment.class);
 
 		assertEquals(0, q.getResultList().size());
+		assertEquals(0, qa.getResultList().size());
+		assertEquals(0, qc.getResultList().size());
 
-		SetupDataCreator userCreator = new SetupDataCreator();
-		userCreator.contextInitialized(null);
+		SetupDataCreator setUpDataCreator = new SetupDataCreator();
+		setUpDataCreator.contextInitialized(null);
 
 		assertEquals(1, q.getResultList().size());
+		assertEquals(1, qa.getResultList().size());
+		assertEquals(1, qc.getResultList().size());
+
+		setUpDataCreator.contextDestroyed(null);
 
 	}
 
