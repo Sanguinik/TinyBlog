@@ -1,6 +1,8 @@
 package de.hszg.tinyblog.view;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 
@@ -17,6 +19,7 @@ import de.hszg.tinyblog.persistence.model.Comment;
 import de.hszg.tinyblog.persistence.model.User;
 import de.hszg.tinyblog.service.CommentService;
 import de.hszg.tinyblog.service.CommentServiceImpl;
+import de.hszg.tinyblog.util.CommentDateComparator;
 
 /**
  * 
@@ -47,7 +50,6 @@ public class CommentBean {
 	 * Empty Constructor for JSF.
 	 */
 	public CommentBean() {
-		logger.info("Constructor");
 	}
 
 	/**
@@ -56,11 +58,16 @@ public class CommentBean {
 	 * 
 	 * @param article
 	 *            The article where the comments should be loaded from.
-	 * @return A list with the comments of the article.
+	 * @return A sorted list with the comments of the article. The first comment
+	 *         made is on the top of the list.
 	 */
 	public List<Comment> showAllComments(final Article article) {
 		comments = commentService.findAllComments(article);
-		return new ArrayList<Comment>(comments);
+		List<Comment> commentList = new ArrayList<Comment>(comments);
+		Comparator<Comment> comp = new CommentDateComparator();
+		Collections.sort(commentList, comp);
+
+		return commentList;
 	}
 
 	/**
