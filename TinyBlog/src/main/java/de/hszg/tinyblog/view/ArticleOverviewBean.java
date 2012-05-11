@@ -22,6 +22,7 @@ import de.hszg.tinyblog.util.ArticleDateComparator;
 @ManagedBean
 public class ArticleOverviewBean {
 
+	private static final int PREVIEW_LENGTH = 200;
 	private List<Article> articleList = new ArrayList<Article>();
 
 	/**
@@ -48,13 +49,21 @@ public class ArticleOverviewBean {
 		return articleList;
 	}
 
+	/**
+	 * This method creates the preview for the given Article.
+	 * 
+	 * @param article
+	 *            The article where the content should be shorten.
+	 * @return The shorten content of the article.
+	 */
+
 	public String articlePreview(final Article article) {
 
 		String content = article.getContent();
 
-		if (content.length() > 200) {
+		if (content.length() > PREVIEW_LENGTH) {
 
-			content = content.substring(0, 199);
+			content = content.substring(0, PREVIEW_LENGTH - 1);
 
 			content = content.concat(" [...]");
 		}
