@@ -12,7 +12,7 @@
 							<h:commandLink value="#{article.title}" action="#{fullArticleBean.showFullArticle(article)}"/>
 						</h2>
 						<h:outputText
-							value="#{article.content}" escape="false"/>
+							value="#{articleOverviewBean.articlePreview(article)}" escape="false"/>
 						
 						<br />
 						<h:commandLink value="Alles lesen" action="#{fullArticleBean.showFullArticle(article)}" />

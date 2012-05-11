@@ -48,4 +48,18 @@ public class ArticleOverviewBean {
 		return articleList;
 	}
 
+	public String articlePreview(final Article article) {
+
+		String content = article.getContent();
+
+		if (content.length() > 200) {
+
+			content = content.substring(0, 199);
+
+			content = content.concat(" [...]");
+		}
+
+		return content;
+	}
+
 }
