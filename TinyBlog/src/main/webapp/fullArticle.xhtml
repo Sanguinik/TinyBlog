@@ -71,7 +71,10 @@
 					<h:inputText id="email" required="true"
 						requiredMessage="Bitte E-Mail-Adresse angeben."
 						rendered="#{not authenticationContextBean.loggedIn}"
-						value="#{commentBean.email}" />
+						value="#{commentBean.email}" 
+						validatorMessage="Keine gültige E-Mail-Adresse!">
+						<f:validateRegex pattern=".+@.+\..+"/>
+					</h:inputText>
 					<h:inputText rendered="#{authenticationContextBean.loggedIn}"
 						value="#{commentBean.user.email}" disabled="true"/>
 					<h:message for="email" styleClass="errMessage" />
