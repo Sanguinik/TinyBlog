@@ -14,11 +14,16 @@
 
 	<h:outputStylesheet library="css" name="style.css" />
 
+
+
 	<ui:composition template="/template.xhtml">
-	
+
 		<ui:define name="header">
 			<h1>
-				<h:outputText value=" Neuen Artikel erstellen" />
+				<h:outputText rendered="#{authenticationContextBean.loggedIn}"
+					value=" Neuen Artikel erstellen" />
+				<h:outputText rendered="#{not authenticationContextBean.loggedIn}"
+					value="Zugriff verweigert" />
 			</h1>
 		</ui:define>
 
@@ -26,20 +31,32 @@
 
 
 
-			<h:form>
+			<h:form rendered="#{authenticationContextBean.loggedIn}">
+
 				<h:outputLabel value="Titel des Artikels: " />
 				<h:inputText id="title" required="true" size="60"
-					requiredMessage="Der Titel darf nicht leer sein." value="#{createArticleBean.title}" />
+					requiredMessage="Der Titel darf nicht leer sein."
+					value="#{createArticleBean.title}" />
 				<br />
-				<h:message for="title" styleClass="errMessage"/>
+				<h:message for="title" styleClass="errMessage" />
 				<br />
-				<p:editor id="editor" width="720" required="true" 
-					requiredMessage="Der Artikel darf nicht leer sein." value="#{createArticleBean.content}" />
-				 
-				<h:message for="editor" styleClass="errMessage"/>
-				 
+				<p:editor id="editor" width="720" required="true"
+					requiredMessage="Der Artikel darf nicht leer sein."
+					value="#{createArticleBean.content}" />
+
+				<h:message for="editor" styleClass="errMessage" />
+
 				<br />
-				<h:commandButton value="Veröffentlichen" action="#{createArticleBean.addArticle}"/>
+				<h:commandButton value="Veröffentlichen"
+					action="#{createArticleBean.addArticle}" />
+			</h:form>
+
+			<h:form rendered="#{not authenticationContextBean.loggedIn}">
+				<h:outputText
+					value="Dieser Bereich kann nur von eingeloggten
+			 Nutzern aufgerufen werden." />
+				<br />
+				<h:commandLink value="Zum Login" action="login" />
 			</h:form>
 
 

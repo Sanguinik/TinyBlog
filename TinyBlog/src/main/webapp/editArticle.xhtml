@@ -16,7 +16,8 @@
 
 		<ui:define name="header">
 			<h1>
-				<h:outputText value=" Artikel bearbeiten" />
+				<h:outputText value=" Artikel bearbeiten" rendered="#{authenticationContextBean.loggedIn}"/>
+				<h:outputText value=" Zugriff verweigert" rendered="#{not authenticationContextBean.loggedIn}"/>
 			</h1>
 		</ui:define>
 
@@ -24,23 +25,34 @@
 
 
 
-			<h:form>
+			<h:form rendered="#{authenticationContextBean.loggedIn}">
 				<h:outputLabel value="Titel des Artikels: " />
 				<h:inputText id="title" required="true" size="60"
-					requiredMessage="Der Titel darf nicht leer sein." value="#{editArticleBean.article.title}"/>
+					requiredMessage="Der Titel darf nicht leer sein."
+					value="#{editArticleBean.article.title}" />
 				<br />
 				<h:message for="title" styleClass="errMessage" />
 				<br />
 				<p:editor id="editor" width="720" required="true"
-					requiredMessage="Der Artikel darf nicht leer sein." value="#{editArticleBean.article.content}" />
+					requiredMessage="Der Artikel darf nicht leer sein."
+					value="#{editArticleBean.article.content}" />
 				<h:message for="editor" styleClass="errMessage" />
 				<br />
 				<h:panelGrid columns="2">
-					<h:commandButton value="Ändernungen speichern" action="#{editArticleBean.editArticle}" />
-					<h:commandButton value="Artikel löschen" action="#{editArticleBean.removeArticle}" />
+					<h:commandButton value="Ändernungen speichern"
+						action="#{editArticleBean.editArticle}" />
+					<h:commandButton value="Artikel löschen"
+						action="#{editArticleBean.removeArticle}" />
 				</h:panelGrid>
 			</h:form>
 
+			<h:form rendered="#{not authenticationContextBean.loggedIn}">
+				<h:outputText
+					value="Dieser Bereich kann nur von eingeloggten
+			 Nutzern aufgerufen werden." />
+				<br />
+				<h:commandLink value="Zum Login" action="login" />
+			</h:form>
 
 
 

@@ -25,11 +25,23 @@
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>newArticle</from-outcome>
+			<if>#{authenticationContextBean.loggedIn}</if>
 			<to-view-id>/newArticle.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
+		    <from-outcome>newArticle</from-outcome>
+		    <if>#{not authenticationContextBean.loggedIn}</if>
+		    <to-view-id>/accessDenied.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
 			<from-outcome>editArticle</from-outcome>
+			<if>#{authenticationContextBean.loggedIn}</if>
 			<to-view-id>/editArticle.xhtml</to-view-id>
+		</navigation-case>
+			<navigation-case>
+			<from-outcome>editArticle</from-outcome>
+			<if>#{not authenticationContextBean.loggedIn}</if>
+			<to-view-id>/accessDenied.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>fullArticle</from-outcome>

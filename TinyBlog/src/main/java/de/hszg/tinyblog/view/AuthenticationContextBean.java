@@ -24,6 +24,7 @@ public class AuthenticationContextBean implements Serializable {
 	private String email;
 	private String password;
 	private User user;
+	private boolean loggedIn;
 
 	/**
 	 * Empty constructor is needed for JSF.
@@ -31,8 +32,6 @@ public class AuthenticationContextBean implements Serializable {
 	public AuthenticationContextBean() {
 
 	}
-
-	private boolean loggedIn;
 
 	public boolean isLoggedIn() {
 		return loggedIn;
