@@ -21,6 +21,7 @@ import de.hszg.tinyblog.service.AuthenticationServiceImpl;
 public class AuthenticationContextBean implements Serializable {
 
 	private static final long serialVersionUID = -3185273713868882607L;
+	private AuthenticationService authenticationService;
 	private String email;
 	private String password;
 	private User user;
@@ -30,6 +31,7 @@ public class AuthenticationContextBean implements Serializable {
 	 * Empty constructor is needed for JSF.
 	 */
 	public AuthenticationContextBean() {
+		authenticationService = new AuthenticationServiceImpl();
 
 	}
 
@@ -47,9 +49,6 @@ public class AuthenticationContextBean implements Serializable {
 	 *         current page if the data was not correct.
 	 */
 	public String login() {
-		FacesContext context = FacesContext.getCurrentInstance();
-
-		AuthenticationService authenticationService = new AuthenticationServiceImpl();
 
 		if (authenticationService.checkPassword(email, password)) {
 			loggedIn = true;
@@ -57,10 +56,15 @@ public class AuthenticationContextBean implements Serializable {
 			return "index";
 		}
 
-		context.addMessage("inputForm:email", new FacesMessage(
-				"E-Mail-Adresse und/oder Passwort sind falsch."));
+		addMessage("inputForm:email",
+				"E-Mail-Adresse und/oder Passwort sind falsch.");
 
 		return null;
+	}
+
+	private void addMessage(final String inputId, final String message) {
+		FacesContext context = FacesContext.getCurrentInstance();
+		context.addMessage(inputId, new FacesMessage(message));
 	}
 
 	/**
